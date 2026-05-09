@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Admin Prodi TI
+        User::where('email', 'admin.ti@prodi.com')->delete();
         $adminProdi = User::create([
+
             'nama' => 'Admin',
             'email' => 'admin.ti@prodi.com',
             'password' => bcrypt('prodi123'),
@@ -25,7 +27,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Dosen
+        // User::where('email', 'dosen@ti.com')->delete();
+
         $dosenUser = User::create([
+
+
             'nama' => 'Dr. Bambang',
             'email' => 'dosen@ti.com',
             'password' => bcrypt('dosen123'),
@@ -33,13 +39,14 @@ class DatabaseSeeder extends Seeder
             'status' => 'aktif',
             'prodi' => 'Teknik Informatika'
         ]);
-        Dosen::create([
+        $dosenUserCreated = Dosen::create([
             'id_user' => $dosenUser->id_user,
             'nip' => '1234567890',
             'nama' => 'Dr. Bambang Setiawan',
             'prodi' => 'Teknik Informatika',
             'jenis_kelamin' => 'L'
         ]);
+
 
         // Mahasiswa
         $mhsUser = User::create([
@@ -63,13 +70,18 @@ class DatabaseSeeder extends Seeder
             'nama_matkul' => 'Web Programming',
             'sks' => 3,
             'semester' => 5,
+            'jenis_matkul' => 'Wajib',
             'prodi' => 'Teknik Informatika'
         ]);
+
 
         KelasPerkuliahan::create([
             'nama_kelas' => 'A1',
             'id_matkul' => $matkul->id_matkul,
-            'id_dosen' => $dosenUser->id_user,
+            'id_dosen' => $dosenUserCreated->id_dosen,
+
+
+
             'ruangan' => 'Lab 1',
             'hari' => 'Senin',
             'jam_awal' => '08:00:00',

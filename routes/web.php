@@ -18,6 +18,8 @@ use App\Http\Controllers\Administrator\ProfileController as AdminProfile;
 
 use Illuminate\Support\Facades\Auth;
 
+
+
 Route::get('/', function () {
     if (Auth::check()) {
         $user = Auth::user();

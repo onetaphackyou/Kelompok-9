@@ -1,5 +1,5 @@
-// app/Models/KelasPerkuliahan.php
 <?php
+
 
 namespace App\Models;
 

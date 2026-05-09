@@ -1,8 +1,6 @@
-// app/Http/Controllers/AdminProdi/DashboardController.php
 <?php
 
 namespace App\Http\Controllers\AdminProdi;
-
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
 use App\Models\Dosen;

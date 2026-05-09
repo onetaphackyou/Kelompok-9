@@ -1,5 +1,5 @@
-// app/Models/MataKuliah.php
 <?php
+
 
 namespace App\Models;
 

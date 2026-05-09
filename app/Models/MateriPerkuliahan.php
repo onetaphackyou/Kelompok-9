@@ -1,5 +1,5 @@
-// app/Models/MateriPerkuliahan.php
 <?php
+
 
 namespace App\Models;
 

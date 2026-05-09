@@ -1,5 +1,5 @@
-// app/Models/Mahasiswa.php
 <?php
+
 
 namespace App\Models;
 
