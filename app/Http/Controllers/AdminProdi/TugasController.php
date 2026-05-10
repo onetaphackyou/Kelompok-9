@@ -1,4 +1,3 @@
-// app/Http/Controllers/AdminProdi/TugasController.php
 <?php
 
 namespace App\Http\Controllers\AdminProdi;
@@ -16,21 +15,21 @@ class TugasController extends Controller
         $id_kelas = $request->get('id_kelas', 0);
 
         $tugas_list = TugasPerkuliahan::with(['materi'])
-            ->whereHas('materi', function($q) use ($id_kelas) {
+            ->whereHas('materi', function ($q) use ($id_kelas) {
                 $q->where('id_kelas', $id_kelas);
             })
-            ->withCount(['penilaian as jumlah_diserahkan' => function($q) {
+            ->withCount(['penilaian as jumlah_diserahkan' => function ($q) {
                 $q->where('status', 'diserahkan');
             }])
-            ->withCount(['penilaian as jumlah_dinilai' => function($q) {
+            ->withCount(['penilaian as jumlah_dinilai' => function ($q) {
                 $q->whereNotNull('nilai');
             }])
             ->orderBy('deadline', 'desc')
             ->get();
 
-        // Get total peserta count
         $total_peserta = \App\Models\PesertaKelasPerkuliahan::where('id_kelas', $id_kelas)->count();
 
         return view('admin_prodi.tugas', compact('tugas_list', 'id_kelas', 'admin_prodi', 'total_peserta'));
     }
 }
+

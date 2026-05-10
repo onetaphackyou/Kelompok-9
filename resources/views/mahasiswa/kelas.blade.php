@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Daftar Kelas')
+@section('active_kelas', 'active')
 @section('content')
 <h2 class="section-title">Daftar Kelas</h2>
 <div class="table-responsive" style="background:white;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08);">

@@ -19,12 +19,14 @@ class ProfileController extends Controller
     {
         $request->validate([
             'nama' => 'required',
+            'email' => 'nullable|email|unique:users,email,' . Auth::id() . ',id_user',
             'prodi' => 'required'
         ]);
 
         $user = Auth::user();
         $user->update([
             'nama' => $request->nama,
+            'email' => $request->email,
             'prodi' => $request->prodi
         ]);
 

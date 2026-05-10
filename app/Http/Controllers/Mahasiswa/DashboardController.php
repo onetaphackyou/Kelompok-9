@@ -13,6 +13,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // Cek apakah user sudah memiliki data mahasiswa
+        if (!Auth::user()->mahasiswa) {
+            return redirect()->route('mahasiswa.complete_profile');
+        }
+
         $id_mhs = Auth::user()->mahasiswa->id_mhs;
 
         $kelas_count = PesertaKelasPerkuliahan::where('id_mhs', $id_mhs)->count();

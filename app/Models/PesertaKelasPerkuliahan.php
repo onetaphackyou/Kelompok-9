@@ -12,6 +12,8 @@ class PesertaKelasPerkuliahan extends Model
 
     protected $table = 'peserta_kelas_perkuliahan';
     protected $primaryKey = 'id_peserta';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = ['id_kelas', 'id_mhs', 'nilai_akhir'];
 

@@ -18,7 +18,7 @@ class RegisterController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
         ]);
 
@@ -31,6 +31,6 @@ class RegisterController extends Controller
         ]);
 
         Auth::login($user);
-        return redirect()->route('mahasiswa.dashboard');
+        return redirect()->route('mahasiswa.complete_profile')->with('success', 'Registrasi berhasil! Silakan lengkapi profil Anda.');
     }
 }

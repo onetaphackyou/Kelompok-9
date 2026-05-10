@@ -8,16 +8,26 @@ use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\MataKuliah;
 use App\Models\KelasPerkuliahan;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        //Admministrator
+        User::where('email', 'Administrator')->delete();
+        User::create([
+            'nama' => 'Administrator',
+            'email' => 'administrator@gmail.com',
+            'password' => bcrypt('admin123'),
+            'role' => 'administrator',
+            'status' => 'aktif',
+            'prodi' => null
+        ]);
+
+
         // Admin Prodi TI
         User::where('email', 'admin.ti@prodi.com')->delete();
-        $adminProdi = User::create([
-
+        User::create([
             'nama' => 'Admin',
             'email' => 'admin.ti@prodi.com',
             'password' => bcrypt('prodi123'),
@@ -28,6 +38,9 @@ class DatabaseSeeder extends Seeder
 
         // Dosen
         // User::where('email', 'dosen@ti.com')->delete();
+
+        User::where('email', 'dosen@ti.com')->delete();
+        User::where('nama', 'Dr. Bambang')->delete();
 
         $dosenUser = User::create([
 
@@ -49,6 +62,8 @@ class DatabaseSeeder extends Seeder
 
 
         // Mahasiswa
+        User::where('email', 'mhs1@ti.com')->delete();
+
         $mhsUser = User::create([
             'nama' => 'Willenstein',
             'email' => 'mhs1@ti.com',

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Edit Profil')
+@section('active_profile', 'active')
 @push('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 @endpush
@@ -19,6 +20,12 @@
                     <label for="username" class="form-label">Username *</label>
                     <input type="text" class="form-control" id="username" name="username" value="{{ $user->nama }}" required>
                 </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}">
+                </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="role" class="form-label">Role</label>
                     <input type="text" class="form-control" id="role" value="Administrator" readonly>

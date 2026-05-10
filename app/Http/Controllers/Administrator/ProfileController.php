@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function edit()
+    public function index()
     {
         $user = Auth::user();
         return view('administrator.profile', compact('user'));
@@ -20,10 +20,14 @@ class ProfileController extends Controller
 
         $request->validate([
             'username' => 'required|unique:users,nama,' . $user->id_user . ',id_user',
+            'email' => 'nullable|email|unique:users,email,' . $user->id_user . ',id_user',
             'password' => 'nullable|min:4'
         ]);
 
-        $data = ['nama' => $request->username];
+        $data = [
+            'nama' => $request->username,
+            'email' => $request->email
+        ];
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }

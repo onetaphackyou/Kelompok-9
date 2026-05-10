@@ -13,6 +13,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    @include('partials.shared_styles')
+
     @stack('styles')
 </head>
 <body class="{{ auth()->user()->role ?? '' }}">
@@ -21,18 +23,12 @@
     @include('partials.sidebar')
 
     <div class="main">
-        <div class="header">
-            <div class="logo">Sistem Akademik</div>
-            <div class="profil">
-                <span class="user-name">{{ session('nama', auth()->user()->nama ?? 'User') }}</span>
-                <a href="{{ route('profile') }}"><i class="fas fa-user"></i> Profil</a>
-                <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                    @csrf
-                    <button type="submit" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                </form>
+        @if(session('msg'))
+            <div class="alert alert-{{ session('msg_type', 'info') }} alert-dismissible fade show" role="alert">
+                {{ session('msg') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
-        </div>
-
+        @endif
         @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -52,7 +48,7 @@
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
-    <script src="{{ asset('js/cusstom.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

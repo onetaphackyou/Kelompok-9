@@ -11,7 +11,7 @@
 <div class="card shadow-sm p-4">
     <h5 class="mb-3">{{ $action === 'add' ? 'Tambah Mahasiswa' : 'Edit Mahasiswa' }}</h5>
 
-    <form method="POST" action="{{ $action === 'add' ? route('admin.mahasiswa') : route('admin.mahasiswa', $edit->id_mhs) }}">
+    <form method="POST" action="{{ $action === 'add' ? route('admin_prodi.mahasiswa') : route('admin_prodi.mahasiswa', $edit->id_mhs) }}">
         @csrf
         @if($action === 'edit') @method('POST') @endif
         <input type="hidden" name="action_type" value="{{ $action }}">
@@ -73,12 +73,12 @@
         </div>
 
         <button class="btn btn-primary">Simpan</button>
-        <a href="{{ route('admin.mahasiswa') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('admin_prodi.mahasiswa') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @else
 <div class="d-flex justify-content-end mb-3">
-    <a href="{{ route('admin.mahasiswa', ['action' => 'add']) }}" class="btn btn-success">Tambah Mahasiswa</a>
+    <a href="{{ route('admin_prodi.mahasiswa', ['action' => 'add']) }}" class="btn btn-success">Tambah Mahasiswa</a>
 </div>
 
 <div class="table-responsive" style="background:white;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08);">
@@ -102,8 +102,8 @@
                 <td>{{ $r->prodi }}</td>
                 <td>{{ $r->periode }}</td>
                 <td>
-                    <a href="{{ route('admin.mahasiswa', ['action' => 'edit', 'id' => $r->id_mhs]) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('admin.mahasiswa', $r->id_mhs) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus data mahasiswa?')">
+                    <a href="{{ route('admin_prodi.mahasiswa', ['action' => 'edit', 'id' => $r->id_mhs]) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('admin_prodi.mahasiswa', $r->id_mhs) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus data mahasiswa?')">
                         @csrf @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                     </form>
@@ -115,3 +115,4 @@
 </div>
 @endif
 @endsection
+

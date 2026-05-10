@@ -35,8 +35,9 @@ class DetailKelasController extends Controller
         // Nilai akhir mahasiswa
         $nilai_akhir = \App\Models\PesertaKelasPerkuliahan::with('mahasiswa')
             ->where('id_kelas', $id_kelas)
-            ->orderBy('mahasiswa.nim')
-            ->get();
+            ->get()
+            ->sortBy(fn($item) => $item->mahasiswa?->nim ?? '')
+            ->values();
 
         return view('dosen.detail', compact('kelas_info', 'materi_list', 'tugas_list', 'nilai_akhir', 'id_kelas'));
     }

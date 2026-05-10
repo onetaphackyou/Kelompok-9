@@ -12,6 +12,8 @@ class Dosen extends Model
 
     protected $table = 'dosen';
     protected $primaryKey = 'id_dosen';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'id_user', 'nip', 'nama', 'prodi', 'jenis_kelamin',

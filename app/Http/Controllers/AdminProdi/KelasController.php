@@ -1,4 +1,3 @@
-// app/Http/Controllers/AdminProdi/KelasController.php
 <?php
 
 namespace App\Http\Controllers\AdminProdi;
@@ -24,7 +23,7 @@ class KelasController extends Controller
         }
 
         // Get mata kuliah for current prodi
-        $matkul = MataKuliah::where(function($q) use ($admin_prodi) {
+        $matkul = MataKuliah::where(function ($q) use ($admin_prodi) {
             $q->where('prodi', $admin_prodi)->orWhereNull('prodi');
         })->orderBy('nama_matkul')->get();
 
@@ -33,7 +32,7 @@ class KelasController extends Controller
 
         // Get kelas list
         $kelas = KelasPerkuliahan::with(['mataKuliah', 'dosen'])
-            ->whereHas('dosen', function($q) use ($admin_prodi) {
+            ->whereHas('dosen', function ($q) use ($admin_prodi) {
                 $q->where('prodi', $admin_prodi);
             })
             ->orderBy('id_kelas', 'desc')
@@ -57,12 +56,12 @@ class KelasController extends Controller
             'jam_awal' => 'required',
             'jam_akhir' => 'required',
             'ruangan' => 'required',
-            'periode' => 'required'
+            'periode' => 'required',
         ]);
 
         KelasPerkuliahan::create($request->all());
 
-        return redirect()->route('admin.kelas')->with('msg', 'Kelas berhasil ditambahkan!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.kelas')->with('msg', 'Kelas berhasil ditambahkan!')->with('msg_type', 'success');
     }
 
     public function update(Request $request, $id)
@@ -77,12 +76,12 @@ class KelasController extends Controller
             'jam_awal' => 'required',
             'jam_akhir' => 'required',
             'ruangan' => 'required',
-            'periode' => 'required'
+            'periode' => 'required',
         ]);
 
         $kelas->update($request->all());
 
-        return redirect()->route('admin.kelas')->with('msg', 'Kelas berhasil diperbarui!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.kelas')->with('msg', 'Kelas berhasil diperbarui!')->with('msg_type', 'success');
     }
 
     public function destroy($id)
@@ -90,6 +89,7 @@ class KelasController extends Controller
         $kelas = KelasPerkuliahan::findOrFail($id);
         $kelas->delete();
 
-        return redirect()->route('admin.kelas')->with('msg', 'Kelas berhasil dihapus!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.kelas')->with('msg', 'Kelas berhasil dihapus!')->with('msg_type', 'success');
     }
 }
+

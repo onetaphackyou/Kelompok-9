@@ -12,6 +12,8 @@ class KelasPerkuliahan extends Model
 
     protected $table = 'kelas_perkuliahan';
     protected $primaryKey = 'id_kelas';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'nama_kelas', 'id_matkul', 'id_dosen', 'ruangan',

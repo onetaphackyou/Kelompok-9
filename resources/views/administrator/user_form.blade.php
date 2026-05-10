@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="card p-4">
-    <form method="POST" autocomplete="off">
+    <form method="POST" action="{{ $action == 'add' ? route('administrator.user.store') : route('administrator.user.update', $user->id_user) }}" autocomplete="off">
         @csrf
         @if($action == 'edit') @method('PUT') @endif
 

@@ -12,6 +12,8 @@ class Penilaian extends Model
 
     protected $table = 'penilaian';
     protected $primaryKey = 'id_nilai';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = ['id_tugas', 'id_mhs', 'id_peserta', 'nilai', 'upload_file', 'status'];
 

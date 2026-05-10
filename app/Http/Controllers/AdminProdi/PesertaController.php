@@ -1,4 +1,3 @@
-// app/Http/Controllers/AdminProdi/PesertaController.php
 <?php
 
 namespace App\Http\Controllers\AdminProdi;
@@ -17,9 +16,8 @@ class PesertaController extends Controller
         $admin_prodi = Auth::user()->prodi;
         $id_kelas = $request->get('id_kelas', 0);
 
-        // Get all kelas for this prodi
         $kelas = KelasPerkuliahan::with(['mataKuliah', 'dosen'])
-            ->whereHas('dosen', function($q) use ($admin_prodi) {
+            ->whereHas('dosen', function ($q) use ($admin_prodi) {
                 $q->where('prodi', $admin_prodi);
             })
             ->orderBy('nama_kelas')
@@ -32,7 +30,7 @@ class PesertaController extends Controller
         if ($id_kelas) {
             $info_kelas = KelasPerkuliahan::with(['mataKuliah', 'dosen'])
                 ->where('id_kelas', $id_kelas)
-                ->whereHas('dosen', function($q) use ($admin_prodi) {
+                ->whereHas('dosen', function ($q) use ($admin_prodi) {
                     $q->where('prodi', $admin_prodi);
                 })
                 ->first();
@@ -58,7 +56,7 @@ class PesertaController extends Controller
     {
         $request->validate([
             'id_kelas' => 'required',
-            'id_mhs' => 'required'
+            'id_mhs' => 'required',
         ]);
 
         $exists = PesertaKelasPerkuliahan::where('id_kelas', $request->id_kelas)
@@ -71,7 +69,7 @@ class PesertaController extends Controller
 
         PesertaKelasPerkuliahan::create([
             'id_kelas' => $request->id_kelas,
-            'id_mhs' => $request->id_mhs
+            'id_mhs' => $request->id_mhs,
         ]);
 
         return redirect()->back()->with('msg', 'Peserta berhasil ditambahkan!')->with('msg_type', 'success');
@@ -83,6 +81,9 @@ class PesertaController extends Controller
         $id_kelas = $request->query('id_kelas');
         $peserta->delete();
 
-        return redirect()->route('admin.peserta', ['id_kelas' => $id_kelas])->with('msg', 'Peserta berhasil dihapus!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.peserta', ['id_kelas' => $id_kelas])
+            ->with('msg', 'Peserta berhasil dihapus!')
+            ->with('msg_type', 'success');
     }
 }
+

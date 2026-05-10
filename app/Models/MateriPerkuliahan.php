@@ -12,6 +12,8 @@ class MateriPerkuliahan extends Model
 
     protected $table = 'materi_perkuliahan';
     protected $primaryKey = 'id_materi';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = ['id_kelas', 'judul_materi', 'deskripsi', 'upload_file'];
 

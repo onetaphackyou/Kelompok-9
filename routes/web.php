@@ -42,6 +42,24 @@ Route::middleware(['auth', 'role:administrator'])
     ->group(function () {
         // Pastikan controller Administrator\DashboardController sudah dibuat
         Route::get('/dashboard', [\App\Http\Controllers\Administrator\DashboardController::class, 'index'])->name('dashboard');
+
+        // Profil administrator
+        Route::get('/profile', [\App\Http\Controllers\Administrator\ProfileController::class, 'index'])->name('profile');
+        Route::put('/profile', [\App\Http\Controllers\Administrator\ProfileController::class, 'update']);
+
+        // Data master
+        Route::get('/user', [\App\Http\Controllers\Administrator\UserController::class, 'index'])->name('user.index');
+        Route::get('/user/create', [\App\Http\Controllers\Administrator\UserController::class, 'create'])->name('user.create');
+        Route::post('/user', [\App\Http\Controllers\Administrator\UserController::class, 'store'])->name('user.store');
+        Route::get('/user/{id}/edit', [\App\Http\Controllers\Administrator\UserController::class, 'edit'])->name('user.edit');
+        Route::put('/user/{id}', [\App\Http\Controllers\Administrator\UserController::class, 'update'])->name('user.update');
+        Route::delete('/user/{id}', [\App\Http\Controllers\Administrator\UserController::class, 'destroy'])->name('user.destroy');
+
+        Route::get('/mahasiswa', [\App\Http\Controllers\Administrator\MahasiswaController::class, 'index'])->name('mahasiswa.index');
+        Route::get('/dosen', [\App\Http\Controllers\Administrator\DosenController::class, 'index'])->name('dosen.index');
+        Route::get('/mata-kuliah', [\App\Http\Controllers\Administrator\MataKuliahController::class, 'index'])->name('mata_kuliah.index');
+        Route::get('/kelas-perkuliahan', [\App\Http\Controllers\Administrator\KelasPerkuliahanController::class, 'index'])->name('kelas_perkuliahan.index');
+
         // Tambahkan route lain untuk administrator di sini
     });
 
@@ -117,6 +135,8 @@ Route::middleware(['auth', 'role:dosen'])
         Route::get('/materi/{id_materi}/edit', [\App\Http\Controllers\Dosen\TugasController::class, 'editMateri'])->name('materi.edit');
         Route::put('/materi/{id_materi}', [\App\Http\Controllers\Dosen\TugasController::class, 'updateMateri'])->name('materi.update');
         Route::delete('/materi/{id_materi}', [\App\Http\Controllers\Dosen\TugasController::class, 'destroyMateri'])->name('materi.destroy');
+        Route::post('/materi/tambah', [\App\Http\Controllers\Dosen\DetailKelasController::class, 'tambahMateri'])->name('materi.tambah');
+        Route::delete('/materi/hapus/{id_materi}', [\App\Http\Controllers\Dosen\DetailKelasController::class, 'hapusMateri'])->name('materi.hapus');
 
         // Tugas (CRUD)
         Route::get('/tugas/create/{id_kelas}', [\App\Http\Controllers\Dosen\TugasController::class, 'createTugas'])->name('tugas.create');
@@ -124,6 +144,7 @@ Route::middleware(['auth', 'role:dosen'])
         Route::get('/tugas/{id_tugas}/edit', [\App\Http\Controllers\Dosen\TugasController::class, 'editTugas'])->name('tugas.edit');
         Route::put('/tugas/{id_tugas}', [\App\Http\Controllers\Dosen\TugasController::class, 'updateTugas'])->name('tugas.update');
         Route::delete('/tugas/{id_tugas}', [\App\Http\Controllers\Dosen\TugasController::class, 'destroyTugas'])->name('tugas.destroy');
+        Route::delete('/tugas/hapus/{id_tugas}', [\App\Http\Controllers\Dosen\DetailKelasController::class, 'hapusTugas'])->name('tugas.hapus');
 
         // Lihat pengumpulan tugas mahasiswa
         Route::get('/pengumpulan/{id_tugas}/kelas/{id_kelas}', [\App\Http\Controllers\Dosen\DetailKelasController::class, 'pengumpulan'])->name('pengumpulan');
@@ -148,6 +169,9 @@ Route::middleware(['auth', 'role:mahasiswa'])
     ->prefix('mahasiswa')
     ->name('mahasiswa.')
     ->group(function () {
+        Route::get('/complete-profile', [\App\Http\Controllers\Mahasiswa\ProfileController::class, 'completeProfile'])->name('complete_profile');
+        Route::post('/complete-profile', [\App\Http\Controllers\Mahasiswa\ProfileController::class, 'storeCompleteProfile']);
+
         Route::get('/dashboard', [\App\Http\Controllers\Mahasiswa\DashboardController::class, 'index'])->name('dashboard');
 
         // Kelas yang diikuti

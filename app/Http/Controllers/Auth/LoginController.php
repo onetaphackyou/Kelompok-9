@@ -25,15 +25,28 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        $input = strtolower(trim($request->username));
+        // Normalisasi input supaya tahan spasi tersembunyi/format tidak konsisten
+        $rawInput = (string) $request->username;
+        $input = strtolower(trim($rawInput));
+
+        // khusus email: buang semua whitespace (mis. "admin@x.com ")
+        $emailInput = strtolower(trim($rawInput));
+        $emailInput = preg_replace('/\s+/', '', $emailInput);
+
+        // khusus nama: rapikan spasi ganda
+        $namaInput = strtolower(trim($rawInput));
+        $namaInput = preg_replace('/\s+/', ' ', $namaInput);
+
         // Cek email dulu
-        $user = User::whereRaw('LOWER(email) = ?', [$input])->first();
+        $user = User::whereRaw('LOWER(email) = ?', [$emailInput])->first();
         // Jika tidak ketemu, cek nama
         if (!$user) {
-            $user = User::whereRaw('LOWER(nama) = ?', [$input])->first();
+            $user = User::whereRaw('LOWER(nama) = ?', [$namaInput])->first();
         }
 
+
         if ($user && Hash::check($request->password, $user->password)) {
+
             if ($user->status !== 'aktif') {
                 return back()->with('error', 'Akun tidak aktif');
             }

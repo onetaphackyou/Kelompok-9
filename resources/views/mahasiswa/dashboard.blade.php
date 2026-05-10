@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Dashboard Mahasiswa')
+@section('active_dashboard', 'active')
+
 @section('content')
 <h4 class="mb-4 section-title">Dashboard Mahasiswa</h4>
 <div class="row g-3">

@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.body.appendChild(openBtn);
 
-    // Show/hide open button based on sidebar state
     function updateOpenBtn() {
         if (sidebar.classList.contains('closed')) {
             openBtn.classList.remove('d-none');

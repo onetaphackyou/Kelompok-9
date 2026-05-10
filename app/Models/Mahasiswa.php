@@ -12,6 +12,8 @@ class Mahasiswa extends Model
 
     protected $table = 'mahasiswa';
     protected $primaryKey = 'id_mhs';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'id_user', 'nim', 'nama', 'tempat_lahir', 'tanggal_lahir',

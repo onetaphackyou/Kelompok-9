@@ -12,6 +12,8 @@ class TugasPerkuliahan extends Model
 
     protected $table = 'tugas_perkuliahan';
     protected $primaryKey = 'id_tugas';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = ['id_materi', 'judul_tugas', 'deskripsi_tugas', 'file_tugas', 'deadline'];
 

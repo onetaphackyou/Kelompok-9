@@ -27,12 +27,12 @@
 
 {{-- Materi --}}
 <div class="card mt-4">
-    <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card-header d-flex justify-content-between align-items-center flex-wrap gap-2">
         <h5 class="mb-0">Materi Perkuliahan</h5>
-        <form action="{{ route('dosen.materi.tambah') }}" method="POST" enctype="multipart/form-data" class="d-inline">
+        <form action="{{ route('dosen.materi.tambah') }}" method="POST" enctype="multipart/form-data" class="d-inline w-100">
             @csrf
             <input type="hidden" name="id_kelas" value="{{ $id_kelas }}">
-            <div class="input-group input-group-sm" style="width: auto;">
+            <div class="input-group input-group-sm">
                 <input type="text" name="judul_materi" placeholder="Judul" class="form-control form-control-sm" required>
                 <input type="file" name="upload_file" class="form-control form-control-sm">
                 <button type="submit" class="btn btn-success btn-sm">+ Tambah Materi</button>
@@ -43,7 +43,7 @@
         <table class="table table-striped">
             <thead><tr><th>Judul</th><th>Deskripsi</th><th>File</th><th>Aksi</th></tr></thead>
             <tbody>
-                @foreach($materi_list as $m)
+                @forelse($materi_list as $m)
                 <tr>
                     <td>{{ $m->judul_materi }}</td>
                     <td>{{ $m->deskripsi ?? '-' }}</td>
@@ -55,7 +55,9 @@
                         </form>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr><td colspan="4" class="text-center">Belum ada materi perkuliahan</td></tr>
+                @endforelse
             </tbody>
         </table>
     </div>
@@ -70,12 +72,12 @@
         <table class="table table-striped">
             <thead><tr><th>Judul Tugas</th><th>Deadline</th><th>File</th><th>Pengumpulan</th><th>Aksi</th></tr></thead>
             <tbody>
-                @foreach($tugas_list as $t)
+                @forelse($tugas_list as $t)
                 <tr>
                     <td>{{ $t->judul_tugas }}</td>
                     <td>{{ $t->deadline->format('d/m/Y H:i') }}</td>
                     <td>@if($t->file_tugas) <a href="{{ asset('uploads/'.$t->file_tugas) }}" download>Download</a> @else - @endif</td>
-                    <td><a href="#" class="btn btn-sm btn-info">Lihat Pengumpulan ({{ $t->jumlah_pengumpulan ?? 0 }})</a></td>
+                    <td><a href="{{ route('dosen.pengumpulan', [$t->id_tugas, $id_kelas]) }}" class="btn btn-sm btn-info">Lihat Pengumpulan ({{ $t->jumlah_pengumpulan ?? 0 }})</a></td>
                     <td>
                         <form action="{{ route('dosen.tugas.hapus', $t->id_tugas) }}" method="POST" onsubmit="return confirm('Hapus tugas?')">
                             @csrf @method('DELETE')
@@ -83,7 +85,9 @@
                         </form>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr><td colspan="5" class="text-center">Belum ada tugas perkuliahan</td></tr>
+                @endforelse
             </tbody>
         </table>
     </div>

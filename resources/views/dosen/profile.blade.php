@@ -25,6 +25,12 @@
         </div>
         <div class="form-row">
             <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" value="{{ old('email', $dosen->user->email ?? '') }}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
                 <label>Jenis Kelamin *</label>
                 <select name="jenis_kelamin" required>
                     <option value="">Pilih</option>

@@ -1,4 +1,3 @@
-// app/Http/Controllers/AdminProdi/DosenController.php
 <?php
 
 namespace App\Http\Controllers\AdminProdi;
@@ -34,19 +33,17 @@ class DosenController extends Controller
             'nip' => 'required|unique:dosen',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
-            'prodi' => 'required'
+            'prodi' => 'required',
         ]);
 
-        // Insert into users table
         $user = User::create([
             'nama' => $request->nip,
             'password' => Hash::make('dosen123'),
             'role' => 'dosen',
             'status' => 'aktif',
-            'prodi' => $request->prodi
+            'prodi' => $request->prodi,
         ]);
 
-        // Insert into dosen table
         Dosen::create([
             'id_user' => $user->id_user,
             'nip' => $request->nip,
@@ -56,10 +53,12 @@ class DosenController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'agama' => $request->agama,
             'jenis_jabatan' => $request->jenis_jabatan,
-            'prodi' => $request->prodi
+            'prodi' => $request->prodi,
         ]);
 
-        return redirect()->route('admin.dosen')->with('msg', 'Dosen berhasil ditambahkan!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.dosen')
+            ->with('msg', 'Dosen berhasil ditambahkan!')
+            ->with('msg_type', 'success');
     }
 
     public function update(Request $request, $id)
@@ -70,7 +69,7 @@ class DosenController extends Controller
             'nip' => 'required|unique:dosen,nip,' . $id . ',id_dosen',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
-            'prodi' => 'required'
+            'prodi' => 'required',
         ]);
 
         $dosen->update([
@@ -81,15 +80,16 @@ class DosenController extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'agama' => $request->agama,
             'jenis_jabatan' => $request->jenis_jabatan,
-            'prodi' => $request->prodi
+            'prodi' => $request->prodi,
         ]);
 
-        // Update user if needed
         if ($dosen->user) {
             $dosen->user->update(['nama' => $request->nip, 'prodi' => $request->prodi]);
         }
 
-        return redirect()->route('admin.dosen')->with('msg', 'Dosen berhasil diperbarui!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.dosen')
+            ->with('msg', 'Dosen berhasil diperbarui!')
+            ->with('msg_type', 'success');
     }
 
     public function destroy($id)
@@ -98,8 +98,13 @@ class DosenController extends Controller
         $user = User::find($dosen->id_user);
 
         $dosen->delete();
-        if ($user) $user->delete();
+        if ($user) {
+            $user->delete();
+        }
 
-        return redirect()->route('admin.dosen')->with('msg', 'Dosen berhasil dihapus!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.dosen')
+            ->with('msg', 'Dosen berhasil dihapus!')
+            ->with('msg_type', 'success');
     }
 }
+

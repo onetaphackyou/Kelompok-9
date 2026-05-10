@@ -1,4 +1,3 @@
-// app/Http/Controllers/AdminProdi/MateriController.php
 <?php
 
 namespace App\Http\Controllers\AdminProdi;
@@ -23,3 +22,4 @@ class MateriController extends Controller
         return view('admin_prodi.materi', compact('materi_list', 'id_kelas', 'admin_prodi'));
     }
 }
+

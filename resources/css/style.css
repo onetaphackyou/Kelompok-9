@@ -1,0 +1,1058 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --sidebar-width: 280px;
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+
+
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #495057;
+}
+
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Layout Styles */
+.main {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+}
+
+.sidebar.closed + .main {
+    margin-left: 0;
+    width: 100%;
+}
+
+.header {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.profil {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profil .user-name {
+    color: #667eea;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.profil a {
+    background-color: #dc3545;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.profil a:hover {
+    background-color: #c82333;
+}
+
+.profil .logout-btn {
+    background-color: #dc3545;
+}
+
+.profil .logout-btn:hover {
+    background-color: #c82333;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 0;
+    overflow-y: auto;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    z-index: 1000;
+    transition: left 0.3s ease, transform 0.3s ease;
+    transform: translateX(0);
+}
+
+.sidebar.closed {
+    left: -250px;
+    transform: translateX(-100%);
+}
+
+.sidebar.show {
+    left: 0;
+    transform: translateX(0);
+}
+
+.sidebar h3 {
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    position: relative;
+}
+
+.sidebar .close-btn {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.sidebar .close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: rgba(255,255,255,0.1);
+    border-left-color: #ffd700;
+    padding-left: 25px;
+}
+
+/* New Sidebar Structure Styles */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 10px;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.sidebar-content {
+    padding: 0 10px;
+}
+
+.sidebar-section {
+    margin-bottom: 20px;
+}
+
+.sidebar-section h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 15px 0 10px 0;
+    padding: 0 10px;
+    color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-section h4 i {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.sidebar-section a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    margin: 2px 0;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.sidebar-section a i {
+    font-size: 0.85rem;
+    width: 16px;
+    text-align: center;
+}
+
+.sidebar-section a:hover, .sidebar-section a.active {
+    background-color: rgba(255,255,255,0.15);
+    border-left: 3px solid #ffd700;
+    padding-left: 17px;
+    transform: translateX(3px);
+}
+
+.prodi-info {
+    background: rgba(255,255,255,0.1);
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prodi-info i {
+    opacity: 0.8;
+}
+
+.btn-detail {
+    display: inline-block;
+    padding: 0.45rem 0.9rem;
+    border-radius: 0.35rem;
+    color: white;
+    background-color: #667eea;
+    text-decoration: none;
+    transition: background-color 0.25s ease;
+}
+
+.btn-detail:hover {
+    background-color: #5a67d8;
+}
+
+/* Submenu Styles */
+.has-submenu {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background: rgba(255,255,255,0.1);
+    min-width: 150px;
+    border-radius: 4px;
+    padding: 5px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.has-submenu:hover .submenu {
+    display: block;
+}
+
+.submenu a {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+.submenu a:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+/* Administrator Submenu Styles */
+.submenu h4 {
+    margin: 10px 20px 5px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+}
+
+.submenu-items {
+    display: none;
+    margin-left: 20px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    padding: 5px 0;
+    margin-top: 5px;
+    border-left: 3px solid #ffd700;
+}
+
+.submenu-items.show {
+    display: block;
+}
+
+.submenu-items a {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.submenu-items a:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+
+.admin-prodi .submenu {
+    display: block;
+}
+
+.administrator .submenu {
+    position: static;
+    display: block;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 5px 0;
+}
+
+.administrator .submenu-items {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        left: -250px;
+        width: 240px;
+        height: 100vh;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.08);
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .header {
+        margin-left: 0;
+        padding: 15px 20px;
+    }
+}
+
+.mahasiswa .sidebar, .dosen .sidebar , .admin-prodi .sidebar, .administrator .sidebar {
+    background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+}
+
+
+/* Role-specific Header Overrides */
+.mahasiswa .logo,
+.mahasiswa .profil .user-name, .dosen .logo,
+.dosen .profil .user-name ,.admin-prodi .logo,
+.admin-prodi .profil .user-name {
+    color: #4A90E2;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 73px;
+        left: -100%;
+        z-index: 1050;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.show {
+        left: 0;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .btn-group-sm > .btn, .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Auth styles */
+.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.card {
+    border: none;
+    border-radius: 20px;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+.profile-container {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #4A90E2;
+}
+
+.profile-header h2 {
+    color: #4A90E2;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #4A90E2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-primary {
+    background-color: #4A90E2;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #357ABD;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+    .sidebar {
+        display: none;
+    }
+}
+
+/* Mahasiswa Role Specific Styles */
+body.mahasiswa, body.dosen , body.admin-prodi, body.administrator {
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+}
+
+body.mahasiswa .sidebar, body.dosen .sidebar , body.admin-prodi .sidebar, body.administrator .sidebar {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    box-shadow: 2px 0 10px rgba(33, 150, 243, 0.3);
+}
+
+body.mahasiswa .sidebar a:hover, body.mahasiswa .sidebar a.active, body.dosen .sidebar a:hover, body.dosen .sidebar a.active , body.admin-prodi .sidebar a:hover, body.admin-prodi .sidebar a.active, body.administrator .sidebar a:hover, body.administrator .sidebar a.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-left-color: #FFD700;
+    transform: translateX(5px);
+}
+
+body.mahasiswa .header, body.dosen .header , body.admin-prodi .header, body.administrator .header {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+body.mahasiswa .logo , body.dosen .logo , body.admin-prodi .logo, body.administrator .logo {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+body.mahasiswa .profil .user-name, body.dosen .profil .user-name , body.admin-prodi .profil .user-name, body.administrator .profil .user-name {
+    color: #FFD700;
+    font-weight: 600;
+}
+
+body.mahasiswa .profil a, body.dosen .profil a , body.admin-prodi .profil a, body.administrator .profil a {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+body.mahasiswa .profil a:hover, body.dosen .profil a:hover , body.admin-prodi .profil a:hover, body.administrator .profil a:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+body.mahasiswa .card-stat, body.dosen .card-stat, body.admin-prodi .card-stat, body.administrator .card-stat {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+body.mahasiswa .card-stat h3, body.dosen .card-stat h3 , body.admin-prodi .card-stat h3, body.administrator .card-stat h3 {
+    color: #FFD700;
+}
+
+body.mahasiswa .card-stat h1, body.dosen .card-stat h1 , body.admin-prodi .card-stat h1, body.administrator .card-stat h1 {
+    color: white;
+    font-weight: bold;
+}
+
+body.mahasiswa table thead, body.dosen table thead , body.admin-prodi table thead, body.administrator table thead {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+}
+
+body.mahasiswa .btn-primary, body.dosen .btn-primary , body.admin-prodi .btn-primary, body.administrator .btn-primary {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    border: none;
+    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.4);
+}
+
+body.mahasiswa .btn-primary:hover, body.dosen .btn-primary:hover , body.admin-prodi .btn-primary:hover, body.administrator .btn-primary:hover {
+    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(33, 150, 243, 0.5);
+}
+
+body.mahasiswa .section-title, body.dosen .section-title , body.admin-prodi .section-title, body.administrator .section-title {
+    border-bottom-color: #2196F3;
+    color: #1976D2;
+}
+
+/* Prodi-specific Styles */
+.prodi-informatika .sidebar {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+.prodi-informatika .header {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+.prodi-informatika .card-stat {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+.prodi-informatika table thead {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+.prodi-informatika .btn-primary {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+
+/* Mahasiswa Kelas Styles */
+.detail-container {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.detail-item {
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #4A90E2;
+    border-radius: 4px;
+}
+
+.detail-item label {
+    font-weight: 600;
+    color: #4A90E2;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.detail-item p {
+    color: #333;
+    margin: 0;
+}
+
+.close-detail {
+    display: block;
+    margin: 20px 0;
+    padding: 10px 20px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Admin Prodi Peserta Styles */
+.class-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+.class-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Admin Prodi Kelas Styles */
+.detail-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    position: sticky;
+    top: 20px;
+    z-index: 10;
+}
+.detail-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.detail-item {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+.detail-item label {
+    color: #666;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 5px;
+}
+.detail-item strong {
+    color: #333;
+    font-size: 1.1rem;
+}
+
+
+
+.close-detail:hover {
+    background: #5a6268;
+}
+
+/* Section Title Styles */
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #4A90E2;
+}
+
+/* Role-specific Section Title Colors */
+.mahasiswa .section-title, .dosen .section-title , .admin-prodi .section-title, .administrator .section-title {
+    border-bottom-color: #4A90E2;
+}
+
+/* Table Styles */
+table {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead {
+    background: #4A90E2;
+    color: white;
+}
+
+table thead th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+table tbody tr:hover {
+    background: #f5f5f5;
+}
+
+table tbody td {
+    padding: 12px;
+    border-bottom: 1px solid #dee2e6;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* Role-specific Table Header Colors */
+.mahasiswa table thead, .dosen table thead, .admin-prodi table thead, .administrator table thead {
+    background: #4A90E2;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.btn-add {
+    padding: 6px 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.btn-add:hover {
+    background: #218838;
+}
+
+.btn-edit {
+    padding: 6px 12px;
+    background: #ffc107;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-right: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-edit:hover {
+    background: #e0a800;
+}
+
+.btn-delete {
+    padding: 12px 30px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+}
+
+.btn-detail {
+    padding: 12px 30px;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-detail:hover {
+    background: #0b5ed7;
+}
+
+.btn-info {
+    padding: 12px 30px;
+    background-color: #17a2b8;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+/* =========================================================
+   BUTTON CONTAINER – ADMIN PRODI
+========================================================= */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+/* =========================================================
+   BUTTON BASE STYLE (GLOBAL - OVERRIDE BOOTSTRAP AMAN)
+========================================================= */
+.btn, .button-container .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border-radius: 8px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-align: center;
+    min-height: 44px;
+}
+
+/* Button Container Specific Styles */
+.button-container .btn {
+    min-width: 220px;
+    padding: 14px 22px;
+    font-size: 15px;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* =========================================================
+   BUTTON VARIANTS (GLOBAL)
+========================================================= */
+
+/* Delete/Danger buttons */
+.btn-delete {
+    background: linear-gradient(135deg, #dc3545, #b02a37);
+    color: #ffffff;
+}
+
+/* Detail/Primary buttons */
+.btn-detail {
+    background: linear-gradient(135deg, #0d6efd, #084298);
+    color: #ffffff;
+}
+
+/* Info/Secondary buttons */
+.btn-info {
+    background: linear-gradient(135deg, #17a2b8, #117a8b);
+    color: #ffffff;
+}
+
+/* Add/Success buttons */
+.btn-add {
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: #ffffff;
+}
+
+/* Edit/Warning buttons */
+.btn-edit {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+    color: #212529;
+}
+
+/* =========================================================
+   HOVER & ACTIVE EFFECT (GLOBAL)
+========================================================= */
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    opacity: 0.95;
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Button Container Enhanced Hover */
+.button-container .btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    opacity: 0.96;
+}
+
+.button-container .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* =========================================================
+   FOCUS ACCESSIBILITY
+========================================================= */
+.button-container .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.25);
+}
+
+/* =========================================================
+   ICON SUPPORT (OPTIONAL)
+========================================================= */
+.button-container .btn i {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* =========================================================
+   RESPONSIVE – MOBILE FRIENDLY
+========================================================= */
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .button-container .btn {
+        width: 100%;
+        min-width: unset;
+        padding: 14px;
+        font-size: 14px;
+    }
+}

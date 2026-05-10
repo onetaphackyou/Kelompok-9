@@ -1,4 +1,3 @@
-// app/Http/Controllers/AdminProdi/DetailKelasController.php
 <?php
 
 namespace App\Http\Controllers\AdminProdi;
@@ -17,7 +16,7 @@ class DetailKelasController extends Controller
 
         $kelas_info = KelasPerkuliahan::with(['mataKuliah', 'dosen'])
             ->where('id_kelas', $id_kelas)
-            ->whereHas('dosen', function($q) use ($admin_prodi) {
+            ->whereHas('dosen', function ($q) use ($admin_prodi) {
                 $q->where('prodi', $admin_prodi);
             })
             ->firstOrFail();
@@ -28,21 +27,21 @@ class DetailKelasController extends Controller
             ->get();
 
         $tugas_list = TugasPerkuliahan::with(['materi'])
-            ->whereHas('materi', function($q) use ($id_kelas) {
+            ->whereHas('materi', function ($q) use ($id_kelas) {
                 $q->where('id_kelas', $id_kelas);
             })
-            ->withCount(['penilaian as jumlah_diserahkan' => function($q) {
+            ->withCount(['penilaian as jumlah_diserahkan' => function ($q) {
                 $q->where('status', 'diserahkan');
             }])
-            ->withCount(['penilaian as jumlah_dinilai' => function($q) {
+            ->withCount(['penilaian as jumlah_dinilai' => function ($q) {
                 $q->whereNotNull('nilai');
             }])
             ->orderBy('deadline', 'desc')
             ->get();
 
-        // Get total peserta count
         $total_peserta = \App\Models\PesertaKelasPerkuliahan::where('id_kelas', $id_kelas)->count();
 
         return view('admin_prodi.detail', compact('kelas_info', 'materi_list', 'tugas_list', 'admin_prodi', 'id_kelas', 'total_peserta'));
     }
 }
+

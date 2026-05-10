@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('password');
             $table->enum('role', ['mahasiswa', 'dosen', 'admin_prodi', 'administrator'])->default('mahasiswa');
-            $table->enum('status', ['aktif', 'nonaktif']);
+            $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
             $table->datetime('last_login')->nullable();
             $table->string('prodi', 50)->nullable();
             $table->timestamps();
