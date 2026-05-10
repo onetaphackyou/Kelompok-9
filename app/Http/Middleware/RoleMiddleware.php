@@ -8,17 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         if (!Auth::check()) {
-            abort(403, 'Unauthorized');
+            return redirect()->route('login');
         }
 
-        // Assuming the user's role is stored in a 'role' attribute or column
         $userRole = Auth::user()->role;
-
-        if ($userRole !== $role) {
-            abort(403, 'Access denied – insufficient role.');
+        if (!in_array($userRole, $roles)) {
+            abort(403, 'Akses ditolak.');
         }
 
         return $next($request);

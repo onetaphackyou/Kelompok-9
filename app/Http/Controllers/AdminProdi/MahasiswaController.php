@@ -1,4 +1,3 @@
-// app/Http/Controllers/AdminProdi/MahasiswaController.php
 <?php
 
 namespace App\Http\Controllers\AdminProdi;
@@ -60,7 +59,7 @@ class MahasiswaController extends Controller
             'periode' => $request->periode
         ]);
 
-        return redirect()->route('admin.mahasiswa')->with('msg', 'Mahasiswa berhasil ditambahkan!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.mahasiswa')->with('msg', 'Mahasiswa berhasil ditambahkan!')->with('msg_type', 'success');
     }
 
     public function update(Request $request, $id)
@@ -91,7 +90,7 @@ class MahasiswaController extends Controller
             $mahasiswa->user->update(['nama' => $request->nim, 'prodi' => $request->prodi]);
         }
 
-        return redirect()->route('admin.mahasiswa')->with('msg', 'Mahasiswa berhasil diperbarui!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.mahasiswa')->with('msg', 'Mahasiswa berhasil diperbarui!')->with('msg_type', 'success');
     }
 
     public function destroy($id)
@@ -102,6 +101,6 @@ class MahasiswaController extends Controller
         $mahasiswa->delete();
         if ($user) $user->delete();
 
-        return redirect()->route('admin.mahasiswa')->with('msg', 'Mahasiswa berhasil dihapus!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.mahasiswa')->with('msg', 'Mahasiswa berhasil dihapus!')->with('msg_type', 'success');
     }
 }

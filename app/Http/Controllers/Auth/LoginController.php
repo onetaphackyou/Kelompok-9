@@ -25,10 +25,13 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        $input = trim($request->username);
-        $user = User::whereRaw('LOWER(nama) = ?', [strtolower($input)])
-            ->orWhereRaw('LOWER(email) = ?', [strtolower($input)])
-            ->first();
+        $input = strtolower(trim($request->username));
+        // Cek email dulu
+        $user = User::whereRaw('LOWER(email) = ?', [$input])->first();
+        // Jika tidak ketemu, cek nama
+        if (!$user) {
+            $user = User::whereRaw('LOWER(nama) = ?', [$input])->first();
+        }
 
         if ($user && Hash::check($request->password, $user->password)) {
             if ($user->status !== 'aktif') {
@@ -55,9 +58,7 @@ class LoginController extends Controller
                     session(['nama' => $user->nama]);
                 }
                 return redirect()->route('mahasiswa.dashboard');
-            }
-
-            if ($user->role == 'dosen') {
+            } elseif ($user->role == 'dosen') {
                 $dosen = Dosen::where('id_user', $user->id_user)->first();
                 if ($dosen) {
                     session([
@@ -68,9 +69,7 @@ class LoginController extends Controller
                     session(['nama' => $user->nama]);
                 }
                 return redirect()->route('dosen.dashboard');
-            }
-
-            if ($user->role == 'admin_prodi') {
+            } elseif ($user->role == 'admin_prodi') {
                 session([
                     'nama' => $user->nama,
                     'prodi' => $user->prodi ?? 'Teknik Informatika'
@@ -80,11 +79,12 @@ class LoginController extends Controller
                     session(['id_dosen' => $dosen->id_dosen]);
                 }
                 return redirect()->route('admin_prodi.dashboard');
-            }
-
-            if ($user->role == 'administrator') {
+            } elseif ($user->role == 'administrator') {
                 session(['nama' => 'Administrator']);
                 return redirect()->route('administrator.dashboard');
+            } else {
+                Auth::logout();
+                return back()->with('error', 'Role tidak valid');
             }
         }
 

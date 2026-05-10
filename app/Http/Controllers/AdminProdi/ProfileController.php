@@ -1,4 +1,3 @@
-// app/Http/Controllers/AdminProdi/ProfileController.php
 <?php
 
 namespace App\Http\Controllers\AdminProdi;
@@ -32,6 +31,6 @@ class ProfileController extends Controller
         // Update session
         session(['nama' => $request->nama, 'prodi' => $request->prodi]);
 
-        return redirect()->route('admin.profile')->with('msg', 'Profil berhasil diperbarui!')->with('msg_type', 'success');
+        return redirect()->route('admin_prodi.profile')->with('msg', 'Profil berhasil diperbarui!')->with('msg_type', 'success');
     }
 }
