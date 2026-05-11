@@ -11,7 +11,7 @@
 <div class="card shadow-sm p-4">
     <h5 class="mb-3">{{ $action === 'add' ? 'Tambah Mahasiswa' : 'Edit Mahasiswa' }}</h5>
 
-    <form method="POST" action="{{ $action === 'add' ? route('admin_prodi.mahasiswa') : route('admin_prodi.mahasiswa', $edit->id_mhs) }}">
+    <form method="POST" action="{{ $action === 'add' ? route('admin_prodi.mahasiswa') : route('admin_prodi.mahasiswa.update', $edit->id_mhs) }}">
         @csrf
         @if($action === 'edit') @method('POST') @endif
         <input type="hidden" name="action_type" value="{{ $action }}">
@@ -103,7 +103,7 @@
                 <td>{{ $r->periode }}</td>
                 <td>
                     <a href="{{ route('admin_prodi.mahasiswa', ['action' => 'edit', 'id' => $r->id_mhs]) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('admin_prodi.mahasiswa', $r->id_mhs) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus data mahasiswa?')">
+                    <form action="{{ route('admin_prodi.mahasiswa.destroy', $r->id_mhs) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus data mahasiswa?')">
                         @csrf @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                     </form>

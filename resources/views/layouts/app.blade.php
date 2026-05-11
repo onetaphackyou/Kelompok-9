@@ -23,6 +23,7 @@
     @include('partials.sidebar')
 
     <div class="main">
+        @include('partials.top_nav')
         @if(session('msg'))
             <div class="alert alert-{{ session('msg_type', 'info') }} alert-dismissible fade show" role="alert">
                 {{ session('msg') }}

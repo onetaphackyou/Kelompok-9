@@ -1,4 +1,4 @@
-<div class="sidebar" id="sidebar">
+<div class="sidebar closed" id="sidebar">
     @if(auth()->check())
         <div class="sidebar-header">
             <h3>{{ ucfirst(auth()->user()->role) }}</h3>
@@ -40,41 +40,30 @@
                 </div>
 
             @elseif(auth()->user()->role == 'admin_prodi')
-                <!-- INFO PRODI -->
-                <div class="sidebar-section">
-                    <div class="prodi-info">
-                        <i class="fas fa-university"></i> Prodi: {{ session('prodi') }}
-                    </div>
-                </div>
-
-                <!-- AKADEMIK -->
-                <div class="sidebar-section">
-                    <h4><i class="fas fa-graduation-cap"></i> Akademik</h4>
+                <div class="sidebar-section admin-prodi-menu">
+                    <a href="{{ route('admin_prodi.dashboard') }}" class="@yield('active_dashboard')">
+                        Dashboard
+                    </a>
                     <a href="{{ route('admin_prodi.mahasiswa') }}" class="@yield('active_mahasiswa')">
-                        <i class="fas fa-user-graduate"></i> Mahasiswa
+                        Mahasiswa
                     </a>
                     <a href="{{ route('admin_prodi.dosen') }}" class="@yield('active_dosen')">
-                        <i class="fas fa-chalkboard-teacher"></i> Dosen
+                        Dosen
                     </a>
                     <a href="{{ route('admin_prodi.matkul') }}" class="@yield('active_matkul')">
-                        <i class="fas fa-book"></i> Mata Kuliah
+                        Mata Kuliah
                     </a>
                     <a href="{{ route('admin_prodi.kelas') }}" class="@yield('active_kelas')">
-                        <i class="fas fa-school"></i> Kelas
+                        Kelas
                     </a>
-                </div>
-
-                <!-- PERKULIAHAN -->
-                <div class="sidebar-section">
-                    <h4><i class="fas fa-chalkboard"></i> Perkuliahan</h4>
                     <a href="{{ route('admin_prodi.peserta') }}" class="@yield('active_peserta')">
-                        <i class="fas fa-users"></i> Peserta
+                        Peserta
                     </a>
                     <a href="{{ route('admin_prodi.materi') }}" class="@yield('active_materi')">
-                        <i class="fas fa-file-alt"></i> Materi
+                        Materi
                     </a>
                     <a href="{{ route('admin_prodi.tugas') }}" class="@yield('active_tugas')">
-                        <i class="fas fa-tasks"></i> Tugas
+                        Tugas
                     </a>
                 </div>
 
@@ -97,13 +86,6 @@
                 </div>
             @endif
 
-            <!-- PROFILE -->
-            <div class="sidebar-section">
-                <h4><i class="fas fa-user"></i> Akun</h4>
-                <a href="{{ route(auth()->user()->role . '.profile') }}" class="@yield('active_profile')">
-                    <i class="fas fa-user-edit"></i> Profil
-                </a>
-            </div>
         </div>
 
     @else

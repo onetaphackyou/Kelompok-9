@@ -72,7 +72,7 @@
                     <td>{{ $item->mahasiswa->nama ?? '-' }}</td>
                     <td>{{ $item->mahasiswa->prodi ?? '-' }}</td>
                     <td>
-                        <form action="{{ route('admin_prodi.peserta', $item->id_peserta) }}?id_kelas={{ $id_kelas }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus peserta ini?');">
+                        <form action="{{ route('admin_prodi.peserta.destroy', $item->id_peserta) }}?id_kelas={{ $id_kelas }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus peserta ini?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>

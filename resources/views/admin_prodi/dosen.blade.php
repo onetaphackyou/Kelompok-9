@@ -11,7 +11,7 @@
 <div class="card shadow-sm p-4 mb-4">
     <h5 class="mb-3">{{ $action === 'add' ? 'Tambah Dosen' : 'Edit Dosen' }}</h5>
 
-    <form method="POST" action="{{ $action === 'add' ? route('admin_prodi.dosen') : route('admin_prodi.dosen', $edit->id_dosen) }}">
+    <form method="POST" action="{{ $action === 'add' ? route('admin_prodi.dosen') : route('admin_prodi.dosen.update', $edit->id_dosen) }}">
         @csrf
         @if($action === 'edit') @method('POST') @endif
 
@@ -97,7 +97,7 @@
                     <td>{{ $item->prodi }}</td>
                     <td>
                         <a href="{{ route('admin_prodi.dosen', ['action' => 'edit', 'id' => $item->id_dosen]) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('admin_prodi.dosen', $item->id_dosen) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus data dosen?');">
+                        <form action="{{ route('admin_prodi.dosen.destroy', $item->id_dosen) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus data dosen?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>

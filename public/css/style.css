@@ -346,7 +346,7 @@ body {
 }
 
 
-.admin-prodi .submenu {
+.admin_prodi .submenu {
     display: block;
 }
 
@@ -385,17 +385,17 @@ body {
     }
 }
 
-.mahasiswa .sidebar, .dosen .sidebar , .admin-prodi .sidebar, .administrator .sidebar {
-    background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+.mahasiswa .sidebar, .dosen .sidebar , .admin_prodi .sidebar, .administrator .sidebar {
+    background: linear-gradient(180deg, #0d6efd 0%, #0b5ed7 100%);
 }
 
 
 /* Role-specific Header Overrides */
 .mahasiswa .logo,
 .mahasiswa .profil .user-name, .dosen .logo,
-.dosen .profil .user-name ,.admin-prodi .logo,
-.admin-prodi .profil .user-name {
-    color: #4A90E2;
+.dosen .profil .user-name ,.admin_prodi .logo,
+.admin_prodi .profil .user-name {
+    color: white;
 }
 
 
@@ -453,11 +453,11 @@ body {
     text-align: center;
     margin-bottom: 30px;
     padding-bottom: 20px;
-    border-bottom: 2px solid #4A90E2;
+    border-bottom: 2px solid #0d6efd;
 }
 
 .profile-header h2 {
-    color: #4A90E2;
+    color: #0d6efd;
     margin-bottom: 10px;
 }
 
@@ -484,8 +484,8 @@ body {
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: #4A90E2;
-    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.1);
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.1);
 }
 
 .form-row {
@@ -500,7 +500,7 @@ body {
 }
 
 .btn-primary {
-    background-color: #4A90E2;
+    background-color: #0d6efd;
     border: none;
     padding: 12px 30px;
     border-radius: 4px;
@@ -511,7 +511,7 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #357ABD;
+    background-color: #0b5ed7;
 }
 
 .btn-secondary {
@@ -563,105 +563,122 @@ body {
 }
 
 /* Mahasiswa Role Specific Styles */
-body.mahasiswa, body.dosen , body.admin-prodi, body.administrator {
+body.mahasiswa, body.dosen , body.admin_prodi, body.administrator {
     background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
 }
 
-body.mahasiswa .sidebar, body.dosen .sidebar , body.admin-prodi .sidebar, body.administrator .sidebar {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-    box-shadow: 2px 0 10px rgba(33, 150, 243, 0.3);
+body.mahasiswa .sidebar, body.dosen .sidebar , body.admin_prodi .sidebar, body.administrator .sidebar {
+    background: linear-gradient(180deg, #0d6efd 0%, #0b5ed7 100%);
+    box-shadow: 2px 0 10px rgba(13, 110, 253, 0.3);
 }
 
-body.mahasiswa .sidebar a:hover, body.mahasiswa .sidebar a.active, body.dosen .sidebar a:hover, body.dosen .sidebar a.active , body.admin-prodi .sidebar a:hover, body.admin-prodi .sidebar a.active, body.administrator .sidebar a:hover, body.administrator .sidebar a.active {
-    background: rgba(255, 255, 255, 0.2);
-    border-left-color: #FFD700;
-    transform: translateX(5px);
+body.admin_prodi .sidebar .sidebar-section.admin-prodi-menu a {
+    color: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.08);
+    border-left: 3px solid transparent;
+    border-radius: 10px;
+    margin: 6px 0;
 }
 
-body.mahasiswa .header, body.dosen .header , body.admin-prodi .header, body.administrator .header {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+body.admin_prodi .sidebar .sidebar-section.admin-prodi-menu a:hover,
+body.admin_prodi .sidebar .sidebar-section.admin-prodi-menu a.active {
+    background: rgba(255,255,255,0.18);
+    border-left-color: rgba(255,255,255,0.9);
+    transform: translateX(3px);
+}
+
+body.admin_prodi .sidebar .sidebar-section.admin-prodi-menu a.active {
+    background: rgba(255,255,255,0.24);
+}
+
+body.mahasiswa .sidebar a:hover, body.mahasiswa .sidebar a.active, body.dosen .sidebar a:hover, body.dosen .sidebar a.active , body.admin_prodi .sidebar a:hover, body.admin_prodi .sidebar a.active, body.administrator .sidebar a:hover, body.administrator .sidebar a.active {
+    background: rgba(255, 255, 255, 0.18);
+    border-left-color: rgba(255, 255, 255, 0.9);
+    transform: translateX(3px);
+}
+
+body.mahasiswa .header, body.dosen .header , body.admin_prodi .header, body.administrator .header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
     color: white;
-    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
 }
 
-body.mahasiswa .logo , body.dosen .logo , body.admin-prodi .logo, body.administrator .logo {
-    color: #FFD700;
+body.mahasiswa .logo , body.dosen .logo , body.admin_prodi .logo, body.administrator .logo {
+    color: white;
     font-weight: bold;
 }
 
-body.mahasiswa .profil .user-name, body.dosen .profil .user-name , body.admin-prodi .profil .user-name, body.administrator .profil .user-name {
-    color: #FFD700;
+body.mahasiswa .profil .user-name, body.dosen .profil .user-name , body.admin_prodi .profil .user-name, body.administrator .profil .user-name {
+    color: white;
     font-weight: 600;
 }
 
-body.mahasiswa .profil a, body.dosen .profil a , body.admin-prodi .profil a, body.administrator .profil a {
-    background: rgba(255, 255, 255, 0.2);
+body.mahasiswa .profil a, body.dosen .profil a , body.admin_prodi .profil a, body.administrator .profil a {
+    background: rgba(255, 255, 255, 0.18);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-body.mahasiswa .profil a:hover, body.dosen .profil a:hover , body.admin-prodi .profil a:hover, body.administrator .profil a:hover {
+body.mahasiswa .profil a:hover, body.dosen .profil a:hover , body.admin_prodi .profil a:hover, body.administrator .profil a:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
 }
 
-body.mahasiswa .card-stat, body.dosen .card-stat, body.admin-prodi .card-stat, body.administrator .card-stat {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+body.mahasiswa .card-stat, body.dosen .card-stat, body.admin_prodi .card-stat, body.administrator .card-stat {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
     color: white;
     border: none;
-    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
 }
 
-body.mahasiswa .card-stat h3, body.dosen .card-stat h3 , body.admin-prodi .card-stat h3, body.administrator .card-stat h3 {
-    color: #FFD700;
+body.mahasiswa .card-stat h3, body.dosen .card-stat h3 , body.admin_prodi .card-stat h3, body.administrator .card-stat h3 {
+    color: white;
 }
 
-body.mahasiswa .card-stat h1, body.dosen .card-stat h1 , body.admin-prodi .card-stat h1, body.administrator .card-stat h1 {
+body.mahasiswa .card-stat h1, body.dosen .card-stat h1 , body.admin_prodi .card-stat h1, body.administrator .card-stat h1 {
     color: white;
     font-weight: bold;
 }
 
-body.mahasiswa table thead, body.dosen table thead , body.admin-prodi table thead, body.administrator table thead {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+body.mahasiswa table thead, body.dosen table thead , body.admin_prodi table thead, body.administrator table thead {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
     color: white;
 }
 
-body.mahasiswa .btn-primary, body.dosen .btn-primary , body.admin-prodi .btn-primary, body.administrator .btn-primary {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+body.mahasiswa .btn-primary, body.dosen .btn-primary , body.admin_prodi .btn-primary, body.administrator .btn-primary {
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
     border: none;
-    box-shadow: 0 4px 10px rgba(33, 150, 243, 0.4);
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.4);
 }
 
-body.mahasiswa .btn-primary:hover, body.dosen .btn-primary:hover , body.admin-prodi .btn-primary:hover, body.administrator .btn-primary:hover {
-    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+body.mahasiswa .btn-primary:hover, body.dosen .btn-primary:hover , body.admin_prodi .btn-primary:hover, body.administrator .btn-primary:hover {
+    background: linear-gradient(135deg, #0b5ed7 0%, #0a58ca 100%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(33, 150, 243, 0.5);
+    box-shadow: 0 6px 15px rgba(13, 110, 253, 0.5);
 }
 
-body.mahasiswa .section-title, body.dosen .section-title , body.admin-prodi .section-title, body.administrator .section-title {
-    border-bottom-color: #2196F3;
-    color: #1976D2;
+body.mahasiswa .section-title, body.dosen .section-title , body.admin_prodi .section-title, body.administrator .section-title {
+    border-bottom-color: #0d6efd;
+    color: #0b5ed7;
 }
-
-/* Prodi-specific Styles */
 .prodi-informatika .sidebar {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    background: linear-gradient(180deg, #0d6efd 0%, #0b5ed7 100%);
 }
 
 .prodi-informatika .header {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    background: linear-gradient(180deg, #0d6efd 0%, #0b5ed7 100%);
 }
 
 .prodi-informatika .card-stat {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    background: linear-gradient(180deg, #0d6efd 0%, #0b5ed7 100%);
 }
 
 .prodi-informatika table thead {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    background: linear-gradient(180deg, #0d6efd 0%, #0b5ed7 100%);
 }
 
 .prodi-informatika .btn-primary {
-    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    background: linear-gradient(180deg, #0d6efd 0%, #0b5ed7 100%);
 }
 
 
@@ -680,13 +697,13 @@ body.mahasiswa .section-title, body.dosen .section-title , body.admin-prodi .sec
 .detail-item {
     padding: 15px;
     background: #f8f9fa;
-    border-left: 4px solid #4A90E2;
+    border-left: 4px solid #0d6efd;
     border-radius: 4px;
 }
 
 .detail-item label {
     font-weight: 600;
-    color: #4A90E2;
+    color: #0d6efd;
     display: block;
     margin-bottom: 5px;
     font-size: 0.9rem;
@@ -780,12 +797,12 @@ body.mahasiswa .section-title, body.dosen .section-title , body.admin-prodi .sec
     margin-top: 30px;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #4A90E2;
+    border-bottom: 2px solid #0d6efd;
 }
 
 /* Role-specific Section Title Colors */
-.mahasiswa .section-title, .dosen .section-title , .admin-prodi .section-title, .administrator .section-title {
-    border-bottom-color: #4A90E2;
+.mahasiswa .section-title, .dosen .section-title , .admin_prodi .section-title, .administrator .section-title {
+    border-bottom-color: #0d6efd;
 }
 
 /* Table Styles */
@@ -799,7 +816,7 @@ table {
 }
 
 table thead {
-    background: #4A90E2;
+    background: #0d6efd;
     color: white;
 }
 
@@ -821,8 +838,8 @@ table tbody td {
 }
 
 /* Role-specific Table Header Colors */
-.mahasiswa table thead, .dosen table thead, .admin-prodi table thead, .administrator table thead {
-    background: #4A90E2;
+.mahasiswa table thead, .dosen table thead, .admin_prodi table thead, .administrator table thead {
+    background: #0d6efd;
 }
 
 /* Button Styles */

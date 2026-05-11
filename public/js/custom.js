@@ -31,30 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add open button for desktop when sidebar is closed
-    const openBtn = document.createElement('button');
-    openBtn.className = 'btn btn-primary position-fixed d-none d-md-block';
-    openBtn.innerHTML = '<i class="bi bi-chevron-right"></i>';
-    openBtn.style.cssText = 'top: 20px; left: 20px; z-index: 1060; padding: 8px 12px; border-radius: 50%;';
-
-    openBtn.addEventListener('click', function() {
-        sidebar.classList.remove('closed');
-    });
-
-    document.body.appendChild(openBtn);
-
-    function updateOpenBtn() {
-        if (sidebar.classList.contains('closed')) {
-            openBtn.classList.remove('d-none');
-        } else {
-            openBtn.classList.add('d-none');
-        }
-    }
-
-    updateOpenBtn();
-
-    const observer = new MutationObserver(updateOpenBtn);
-    observer.observe(sidebar, { attributes: true, attributeFilter: ['class'] });
 });
 
 // Auto-hide alerts

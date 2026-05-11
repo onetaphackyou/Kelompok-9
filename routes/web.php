@@ -79,35 +79,35 @@ Route::middleware(['auth', 'role:admin_prodi'])
 
         // Manajemen Mahasiswa
         Route::get('/mahasiswa', [\App\Http\Controllers\AdminProdi\MahasiswaController::class, 'index'])->name('mahasiswa');
-        Route::post('/mahasiswa', [\App\Http\Controllers\AdminProdi\MahasiswaController::class, 'store']);
-        Route::post('/mahasiswa/{id}', [\App\Http\Controllers\AdminProdi\MahasiswaController::class, 'update']);
-        Route::delete('/mahasiswa/{id}', [\App\Http\Controllers\AdminProdi\MahasiswaController::class, 'destroy']);
+        Route::post('/mahasiswa', [\App\Http\Controllers\AdminProdi\MahasiswaController::class, 'store'])->name('mahasiswa.store');
+        Route::post('/mahasiswa/{id}', [\App\Http\Controllers\AdminProdi\MahasiswaController::class, 'update'])->name('mahasiswa.update');
+        Route::delete('/mahasiswa/{id}', [\App\Http\Controllers\AdminProdi\MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
 
         // Manajemen Dosen
         Route::get('/dosen', [\App\Http\Controllers\AdminProdi\DosenController::class, 'index'])->name('dosen');
-        Route::post('/dosen', [\App\Http\Controllers\AdminProdi\DosenController::class, 'store']);
-        Route::post('/dosen/{id}', [\App\Http\Controllers\AdminProdi\DosenController::class, 'update']);
-        Route::delete('/dosen/{id}', [\App\Http\Controllers\AdminProdi\DosenController::class, 'destroy']);
+        Route::post('/dosen', [\App\Http\Controllers\AdminProdi\DosenController::class, 'store'])->name('dosen.store');
+        Route::post('/dosen/{id}', [\App\Http\Controllers\AdminProdi\DosenController::class, 'update'])->name('dosen.update');
+        Route::delete('/dosen/{id}', [\App\Http\Controllers\AdminProdi\DosenController::class, 'destroy'])->name('dosen.destroy');
 
         // Manajemen Mata Kuliah
         Route::get('/matkul', [\App\Http\Controllers\AdminProdi\MatkulController::class, 'index'])->name('matkul');
-        Route::post('/matkul', [\App\Http\Controllers\AdminProdi\MatkulController::class, 'store']);
-        Route::post('/matkul/{id}', [\App\Http\Controllers\AdminProdi\MatkulController::class, 'update']);
-        Route::delete('/matkul/{id}', [\App\Http\Controllers\AdminProdi\MatkulController::class, 'destroy']);
+        Route::post('/matkul', [\App\Http\Controllers\AdminProdi\MatkulController::class, 'store'])->name('matkul.store');
+        Route::post('/matkul/{id}', [\App\Http\Controllers\AdminProdi\MatkulController::class, 'update'])->name('matkul.update');
+        Route::delete('/matkul/{id}', [\App\Http\Controllers\AdminProdi\MatkulController::class, 'destroy'])->name('matkul.destroy');
 
         // Manajemen Kelas
         Route::get('/kelas', [\App\Http\Controllers\AdminProdi\KelasController::class, 'index'])->name('kelas');
-        Route::post('/kelas', [\App\Http\Controllers\AdminProdi\KelasController::class, 'store']);
-        Route::post('/kelas/{id}', [\App\Http\Controllers\AdminProdi\KelasController::class, 'update']);
-        Route::delete('/kelas/{id}', [\App\Http\Controllers\AdminProdi\KelasController::class, 'destroy']);
+        Route::post('/kelas', [\App\Http\Controllers\AdminProdi\KelasController::class, 'store'])->name('kelas.store');
+        Route::post('/kelas/{id}', [\App\Http\Controllers\AdminProdi\KelasController::class, 'update'])->name('kelas.update');
+        Route::delete('/kelas/{id}', [\App\Http\Controllers\AdminProdi\KelasController::class, 'destroy'])->name('kelas.destroy');
 
         // Detail Kelas (peserta, materi, tugas)
         Route::get('/kelas/detail/{id_kelas}', [\App\Http\Controllers\AdminProdi\DetailKelasController::class, 'show'])->name('kelas.detail');
 
         // Peserta Kelas
         Route::get('/peserta', [\App\Http\Controllers\AdminProdi\PesertaController::class, 'index'])->name('peserta');
-        Route::post('/peserta', [\App\Http\Controllers\AdminProdi\PesertaController::class, 'store']);
-        Route::delete('/peserta/{id_peserta}', [\App\Http\Controllers\AdminProdi\PesertaController::class, 'destroy']);
+        Route::post('/peserta', [\App\Http\Controllers\AdminProdi\PesertaController::class, 'store'])->name('peserta.store');
+        Route::delete('/peserta/{id_peserta}', [\App\Http\Controllers\AdminProdi\PesertaController::class, 'destroy'])->name('peserta.destroy');
 
         // Materi (tampilan global)
         Route::get('/materi', [\App\Http\Controllers\AdminProdi\MateriController::class, 'index'])->name('materi');

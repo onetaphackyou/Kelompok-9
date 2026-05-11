@@ -11,7 +11,7 @@
 <div class="card shadow-sm p-4 mb-4">
     <h5 class="mb-3">{{ $action === 'add' ? 'Tambah Mata Kuliah' : 'Edit Mata Kuliah' }}</h5>
 
-    <form method="POST" action="{{ $action === 'add' ? route('admin_prodi.matkul') : route('admin_prodi.matkul', $edit_data->id_matkul) }}">
+    <form method="POST" action="{{ $action === 'add' ? route('admin_prodi.matkul') : route('admin_prodi.matkul.update', $edit_data->id_matkul) }}">
         @csrf
         @if($action === 'edit') @method('POST') @endif
 
@@ -75,7 +75,7 @@
                     <td>{{ $item->prodi }}</td>
                     <td>
                         <a href="{{ route('admin_prodi.matkul', ['action' => 'edit', 'id' => $item->id_matkul]) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('admin_prodi.matkul', $item->id_matkul) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus mata kuliah ini?');">
+                        <form action="{{ route('admin_prodi.matkul.destroy', $item->id_matkul) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus mata kuliah ini?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
