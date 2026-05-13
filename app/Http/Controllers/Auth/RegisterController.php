@@ -31,6 +31,15 @@ class RegisterController extends Controller
         ]);
 
         Auth::login($user);
+
+        // Set up session data seperti di LoginController
+        session([
+            'login' => true,
+            'user_id' => $user->id_user,
+            'username' => $user->nama,
+            'role' => $user->role,
+        ]);
+
         return redirect()->route('mahasiswa.complete_profile')->with('success', 'Registrasi berhasil! Silakan lengkapi profil Anda.');
     }
 }

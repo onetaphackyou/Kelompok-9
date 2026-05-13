@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.admin')
 @section('title', 'Edit Profil Dosen')
 @section('active_profile', 'active')
 

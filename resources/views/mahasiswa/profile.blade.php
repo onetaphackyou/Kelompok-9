@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Edit Profil Mahasiswa')
 @section('active_profile', 'active')

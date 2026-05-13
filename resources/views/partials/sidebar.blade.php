@@ -1,4 +1,7 @@
-<div class="sidebar closed" id="sidebar">
+<div class="sidebar" id="sidebar">
+    <button class="sidebar-toggle d-md-none" type="button" id="sidebar-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
     @if(auth()->check())
         <div class="sidebar-header">
             <h3>{{ ucfirst(auth()->user()->role) }}</h3>
@@ -16,7 +19,6 @@
             @if(auth()->user()->role == 'administrator')
                 <!-- USER MANAGEMENT -->
                 <div class="sidebar-section">
-                    <h4><i class="fas fa-users"></i> User Management</h4>
                     <a href="{{ route('administrator.user.index') }}" class="@yield('active_user')">
                         <i class="fas fa-user-cog"></i> Kelola User
                     </a>
@@ -24,7 +26,6 @@
 
                 <!-- DATA MASTER -->
                 <div class="sidebar-section">
-                    <h4><i class="fas fa-database"></i> Data Master</h4>
                     <a href="{{ route('administrator.mahasiswa.index') }}" class="@yield('active_mahasiswa')">
                         <i class="fas fa-user-graduate"></i> Mahasiswa
                     </a>
@@ -70,16 +71,14 @@
             @elseif(auth()->user()->role == 'dosen')
                 <!-- PERKULIAHAN -->
                 <div class="sidebar-section">
-                    <h4><i class="fas fa-chalkboard-teacher"></i> Perkuliahan</h4>
                     <a href="{{ route('dosen.kelas') }}" class="@yield('active_kelas')">
-                        <i class="fas fa-school"></i> Kelas Saya
+                    <i class="fas fa-school"></i> Kelas Saya
                     </a>
                 </div>
 
             @elseif(auth()->user()->role == 'mahasiswa')
                 <!-- AKADEMIK -->
                 <div class="sidebar-section">
-                    <h4><i class="fas fa-graduation-cap"></i> Akademik</h4>
                     <a href="{{ route('mahasiswa.kelas') }}" class="@yield('active_kelas')">
                         <i class="fas fa-school"></i> Kelas Saya
                     </a>

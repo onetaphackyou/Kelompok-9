@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Daftar Kelas')
 @section('active_kelas', 'active')

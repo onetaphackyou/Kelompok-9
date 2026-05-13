@@ -1,36 +1,51 @@
-// Mobile sidebar toggle and desktop close functionality
+// Hamburger menu toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
     const sidebar = document.getElementById('sidebar');
-    if (!sidebar) {
-        return;
+    const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+
+    // New: sidebar toggle for all roles (mobile)
+    if (sidebarToggleBtn && sidebar) {
+        sidebarToggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+            sidebar.classList.toggle('closed');
+            sidebarToggleBtn.classList.toggle('active');
+        });
     }
 
-    const hamburger = document.createElement('button');
-    hamburger.className = 'btn btn-primary d-md-none position-fixed';
-    hamburger.innerHTML = '<i class="bi bi-list"></i>';
-    hamburger.style.cssText = 'top: 85px; right: 15px; z-index: 1060;';
 
-    hamburger.addEventListener('click', function() {
-        sidebar.classList.toggle('show');
-    });
+    const hamburgerBtn = document.getElementById('hamburger-btn');
 
-    document.body.appendChild(hamburger);
+    if (hamburgerBtn && sidebar) {
+        hamburgerBtn.addEventListener('click', function() {
+            // Toggle sidebar visibility
+            sidebar.classList.toggle('closed');
+            hamburgerBtn.classList.toggle('active');
+
+            // For mobile: toggle open class
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('open');
+            }
+        });
+    }
 
     // Close sidebar when clicking outside (mobile)
     document.addEventListener('click', function(e) {
-        if (sidebar.classList.contains('show') && !sidebar.contains(e.target) && !hamburger.contains(e.target)) {
-            sidebar.classList.remove('show');
+        if (sidebar && sidebar.classList.contains('open') &&
+            !sidebar.contains(e.target) &&
+            !hamburgerBtn.contains(e.target)) {
+            sidebar.classList.remove('open');
+            hamburgerBtn.classList.remove('active');
         }
     });
 
     // Desktop close button functionality
-    const closeBtn = sidebar.querySelector('.close-btn');
+    const closeBtn = sidebar ? sidebar.querySelector('.close-btn') : null;
     if (closeBtn) {
         closeBtn.addEventListener('click', function() {
             sidebar.classList.add('closed');
+            if (hamburgerBtn) hamburgerBtn.classList.remove('active');
         });
     }
-
 });
 
 // Auto-hide alerts

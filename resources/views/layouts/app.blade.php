@@ -23,7 +23,90 @@
     @include('partials.sidebar')
 
     <div class="main">
-        @include('partials.top_nav')
+        <div class="header">
+            <button class="hamburger-btn" id="hamburger-btn">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <div class="logo">Sistem Akademik</div>
+            <div class="profil">
+                <div class="dropdown">
+                    <button class="btn btn-profile dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="profile-info">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="profile-details">
+                                <span class="user-name">{{ session('nama', auth()->user()->nama ?? 'User') }}</span>
+                                <span class="user-role">{{ ucfirst(auth()->user()->role ?? 'User') }}</span>
+                            </div>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end profile-dropdown-menu" aria-labelledby="profileDropdown">
+                        @php
+                            $user = auth()->user();
+                            $role = $user->role ?? '';
+$profileData = [];
+
+                            if ($role === 'mahasiswa') {
+                                $mahasiswa = $user->id ? \App\Models\Mahasiswa::where('id_user', $user->id)->first() : null;
+                                $profileData = [
+                                    'nama' => $mahasiswa->nama ?? $user->nama,
+                                    'identifier' => 'NIM: ' . ($mahasiswa->nim ?? '-'),
+                                    'route' => route('mahasiswa.profile')
+                                ];
+                            } elseif ($role === 'dosen') {
+                                $dosen = $user->id ? \App\Models\Dosen::where('id_user', $user->id)->first() : null;
+                                $profileData = [
+                                    'nama' => $dosen->nama ?? $user->nama,
+                                    'identifier' => 'NIDN: ' . ($dosen->nip ?? '-'),
+                                    'route' => route('dosen.profile')
+                                ];
+                            } elseif ($role === 'admin_prodi') {
+                                $profileData = [
+                                    'nama' => $user->nama,
+                                    'identifier' => 'Admin Prodi',
+                                    'route' => route('admin_prodi.profile')
+                                ];
+                            } elseif ($role === 'administrator') {
+                                $profileData = [
+                                    'nama' => $user->nama,
+                                    'identifier' => 'Administrator',
+                                    'route' => route('administrator.profile')
+                                ];
+                            }
+                        @endphp
+
+                        <!-- User Info Section -->
+                        <li class="user-info-section">
+                            <div class="user-info">
+                                <div class="user-info-name">{{ $profileData['nama'] ?? $user->nama }}</div>
+                                <div class="user-info-identifier">{{ $profileData['identifier'] ?? ucfirst($role) }}</div>
+                            </div>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+
+                        <!-- Edit Profile Link -->
+                        <li><a class="dropdown-item edit-profile-link" href="{{ $profileData['route'] ?? '#' }}">
+                            <i class="fas fa-edit"></i> Edit Profil
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+
+                        <!-- Logout -->
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="dropdown-item logout-btn">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         @if(session('msg'))
             <div class="alert alert-{{ session('msg_type', 'info') }} alert-dismissible fade show" role="alert">
                 {{ session('msg') }}

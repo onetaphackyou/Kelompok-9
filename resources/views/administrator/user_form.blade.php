@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', $action == 'add' ? 'Tambah User' : 'Edit User')
 @section('active_user', 'active')
