@@ -87,8 +87,6 @@ body {
     border-radius: 8px;
     margin-bottom: 30px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-left: 270px;
-    transition: margin-left 0.3s ease;
 }
 
 .sidebar.closed + .main .header {
