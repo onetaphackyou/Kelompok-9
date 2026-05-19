@@ -1,39 +1,62 @@
-// Hamburger menu toggle functionality
-document.addEventListener('DOMContentLoaded', function() {
+console.log('custom.js loaded');
+
+document.addEventListener('DOMContentLoaded', function () {
+
     const sidebar = document.getElementById('sidebar');
     const hamburgerBtn = document.getElementById('hamburger-btn');
+    const closeBtn = document.querySelector('.close-btn');
 
-    if (hamburgerBtn && sidebar) {
-        hamburgerBtn.addEventListener('click', function() {
-            // Toggle sidebar visibility
-            sidebar.classList.toggle('closed');
-            hamburgerBtn.classList.toggle('active');
+    // Buat overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'sidebar-overlay';
+    overlay.style.cssText = `
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    `;
+    document.body.appendChild(overlay);
 
-            // For mobile: toggle open class
-            if (window.innerWidth <= 768) {
-                sidebar.classList.toggle('open');
+    function isMobile() {
+        return window.innerWidth <= 768;
+    }
+
+    function openSidebar() {
+        sidebar.classList.add('show');
+        if (isMobile()) overlay.style.display = 'block';
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('show');
+        overlay.style.display = 'none';
+    }
+
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', function () {
+            if (isMobile()) {
+                if (sidebar.classList.contains('show')) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            } else {
+                // Desktop: toggle sidebar
+                sidebar.classList.toggle('closed');
             }
         });
     }
 
-    // Close sidebar when clicking outside (mobile)
-    document.addEventListener('click', function(e) {
-        if (sidebar && sidebar.classList.contains('open') &&
-            !sidebar.contains(e.target) &&
-            !hamburgerBtn.contains(e.target)) {
-            sidebar.classList.remove('open');
-            hamburgerBtn.classList.remove('active');
-        }
-    });
-
-    // Desktop close button functionality
-    const closeBtn = sidebar ? sidebar.querySelector('.close-btn') : null;
     if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
-            sidebar.classList.add('closed');
-            if (hamburgerBtn) hamburgerBtn.classList.remove('active');
+        closeBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            closeSidebar();
         });
     }
+
+    overlay.addEventListener('click', closeSidebar);
+
 });
 
 // Auto-hide alerts

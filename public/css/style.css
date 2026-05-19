@@ -369,6 +369,9 @@ body {
 
 /* Hamburger Button Styles */
 .hamburger-btn {
+    position: relative;
+    z-index: 1100;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -757,12 +760,25 @@ body {
     .form-row {
         grid-template-columns: 1fr;
     }
+
     .main {
         margin-left: 0;
         width: 100%;
     }
+
     .sidebar {
-        display: none;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100vh;
+        z-index: 1050;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.open {
+        left: 0;
     }
 }
 
@@ -1297,4 +1313,14 @@ table tbody td {
 .sidebar-toggle:active {
     transform: translateY(0) !important;
     box-shadow: 0 2px 8px rgba(13, 110, 253, 0.25) !important;
+}
+@media (max-width: 768px) {
+    .sidebar {
+        z-index: 1000;
+    }
+
+    .header {
+        z-index: 100;
+        position: relative;
+    }
 }

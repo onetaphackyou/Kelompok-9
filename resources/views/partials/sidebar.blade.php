@@ -1,7 +1,4 @@
 <div class="sidebar" id="sidebar">
-    <button class="sidebar-toggle d-md-none" type="button" id="sidebar-toggle">
-        <i class="fas fa-bars"></i>
-    </button>
     @if(auth()->check())
         <div class="sidebar-header">
             <h3>{{ ucfirst(auth()->user()->role) }}</h3>
