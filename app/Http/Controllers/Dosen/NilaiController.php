@@ -9,16 +9,34 @@ use Illuminate\Support\Facades\Auth;
 
 class NilaiController extends Controller
 {
-    // ... method create() dan store() untuk memberi nilai per tugas (sudah ada)
+    public function create($id_penilaian)
+    {
+        // $id_penilaian di sini adalah nilai id_nilai dari tabel penilaian
+        $penilaian = Penilaian::with(['tugas.materi', 'mahasiswa'])->findOrFail($id_penilaian);
+        return view('dosen.beri_nilai', compact('penilaian'));
+    }
 
-    /**
-     * Tampilkan form beri nilai akhir untuk seorang mahasiswa di kelas tertentu
-     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            // FIX: sesuaikan nama field dengan yang dikirim form (id_nilai)
+            'id_nilai' => 'required|exists:penilaian,id_nilai',
+            'nilai'    => 'required|numeric|min:0|max:100',
+        ]);
+
+        // FIX: cari pakai id_nilai
+        $penilaian = Penilaian::findOrFail($request->id_nilai);
+        $penilaian->update(['nilai' => $request->nilai]);
+
+        $id_kelas = $penilaian->tugas->materi->id_kelas;
+        return redirect()->route('dosen.kelas.detail', $id_kelas)
+                         ->with('success', 'Nilai berhasil disimpan');
+    }
+
     public function finalGradeForm($id_kelas, $id_mhs)
     {
         $id_dosen = Auth::user()->dosen->id_dosen;
 
-        // Verifikasi kepemilikan kelas oleh dosen
         $kelas = \App\Models\KelasPerkuliahan::where('id_kelas', $id_kelas)
                     ->where('id_dosen', $id_dosen)
                     ->firstOrFail();
@@ -31,9 +49,6 @@ class NilaiController extends Controller
         return view('dosen.beri_nilai_akhir', compact('kelas', 'mahasiswa', 'peserta'));
     }
 
-    /**
-     * Simpan nilai akhir (manual) untuk seorang mahasiswa
-     */
     public function finalGradeStore(Request $request, $id_kelas, $id_mhs)
     {
         $request->validate([
@@ -42,9 +57,9 @@ class NilaiController extends Controller
 
         $id_dosen = Auth::user()->dosen->id_dosen;
 
-        $kelas = \App\Models\KelasPerkuliahan::where('id_kelas', $id_kelas)
-                    ->where('id_dosen', $id_dosen)
-                    ->firstOrFail();
+        \App\Models\KelasPerkuliahan::where('id_kelas', $id_kelas)
+            ->where('id_dosen', $id_dosen)
+            ->firstOrFail();
 
         $peserta = PesertaKelasPerkuliahan::where('id_kelas', $id_kelas)
                     ->where('id_mhs', $id_mhs)

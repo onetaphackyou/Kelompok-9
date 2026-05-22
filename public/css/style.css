@@ -1324,3 +1324,66 @@ table tbody td {
         position: relative;
     }
 }
+@media (max-width: 768px) {
+    .user-name {
+        font-size: 11px;
+        max-width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .user-role {
+        font-size: 10px;
+    }
+
+    .profile-avatar {
+        font-size: 26px;
+        margin-right: 4px;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Fix tabel overflow di mobile */
+    .card {
+        overflow: hidden;
+    }
+
+    .card-body {
+        overflow-x: auto;
+        padding: 10px;
+    }
+
+    table {
+        min-width: 500px;
+    }
+
+    /* Fix form input di mobile */
+    .input-group {
+        flex-wrap: wrap;
+    }
+
+    .input-group .form-control,
+    .input-group .form-select,
+    .input-group .btn {
+        width: 100%;
+        border-radius: 4px !important;
+        margin-bottom: 5px;
+    }
+
+    /* Fix card header form di mobile */
+    .card-header form .row {
+        gap: 8px;
+    }
+
+    .card-header form .col-md-1,
+    .card-header form .col-md-2,
+    .card-header form .col-md-3,
+    .card-header form .col-md-4 {
+        width: 100%;
+    }
+}

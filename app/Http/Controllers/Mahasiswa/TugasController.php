@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use App\Models\Penilaian;
 use App\Models\PesertaKelasPerkuliahan;
+use App\Models\TugasPerkuliahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,32 +16,44 @@ class TugasController extends Controller
         $request->validate([
             'id_tugas' => 'required|exists:tugas_perkuliahan,id_tugas',
             'id_kelas' => 'required|exists:kelas_perkuliahan,id_kelas',
-            'upload_file' => 'required|file|max:2048'
+            'upload_file' => 'required|file|max:5120'
         ]);
 
         $id_mhs = Auth::user()->mahasiswa->id_mhs;
 
-        // Cek atau buat peserta
-        $peserta = PesertaKelasPerkuliahan::firstOrCreate([
-            'id_kelas' => $request->id_kelas,
-            'id_mhs' => $id_mhs
-        ]);
+        $peserta = PesertaKelasPerkuliahan::where('id_kelas', $request->id_kelas)
+                    ->where('id_mhs', $id_mhs)
+                    ->first();
+
+        if (!$peserta) {
+            return redirect()->back()->with('error', 'Kamu tidak terdaftar di kelas ini');
+        }
 
         $file = $request->file('upload_file')->store('tugas_mahasiswa', 'public');
 
-        Penilaian::updateOrCreate(
-            ['id_tugas' => $request->id_tugas, 'id_mhs' => $id_mhs],
-            [
+        $existing = Penilaian::where('id_tugas', $request->id_tugas)
+                    ->where('id_mhs', $id_mhs)
+                    ->first();
+
+        if ($existing) {
+            $existing->update([
+                'upload_file' => $file,
+                'status' => 'diserahkan'
+            ]);
+        } else {
+            Penilaian::create([
+                'id_tugas' => $request->id_tugas,
+                'id_mhs' => $id_mhs,
                 'id_peserta' => $peserta->id_peserta,
                 'upload_file' => $file,
                 'status' => 'diserahkan'
-            ]
-        );
+            ]);
+        }
 
-        // Hitung ulang nilai akhir (bisa panggil helper)
         $this->hitungNilaiAkhir($id_mhs, $request->id_kelas);
 
-        return redirect()->route('mahasiswa.kelas.detail', $request->id_kelas)->with('success', 'Tugas berhasil dikumpulkan');
+        return redirect()->route('mahasiswa.kelas.detail', $request->id_kelas)
+            ->with('success', 'Tugas berhasil dikumpulkan!');
     }
 
     private function hitungNilaiAkhir($id_mhs, $id_kelas)

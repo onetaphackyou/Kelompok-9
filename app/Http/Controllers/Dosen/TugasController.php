@@ -56,25 +56,35 @@ class TugasController extends Controller
         return redirect()->route('dosen.kelas.detail', $id_kelas);
     }
 
-    public function storeTugas(Request $request)
-    {
-        $request->validate([
-            'id_materi' => 'required',
-            'judul_tugas' => 'required',
-            'deskripsi_tugas' => 'nullable',
-            'deadline' => 'required|date',
-        ]);
+   public function storeTugas(Request $request)
+{
+    $request->validate([
+        'id_materi' => 'required',
+        'judul_tugas' => 'required',
+        'deskripsi_tugas' => 'nullable',
+        'deadline' => 'required|date',
+        'file_tugas' => 'nullable|file|max:5120',
+    ]);
 
-        $tugas = TugasPerkuliahan::create([
-            'id_materi' => $request->id_materi,
-            'judul_tugas' => $request->judul_tugas,
-            'deskripsi_tugas' => $request->deskripsi_tugas,
-            'deadline' => $request->deadline,
-        ]);
-
-        $materi = MateriPerkuliahan::find($tugas->id_materi);
-        return redirect()->route('dosen.kelas.detail', $materi?->id_kelas);
+    $file_path = null;
+    if ($request->hasFile('file_tugas')) {
+        $file = $request->file('file_tugas');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('uploads'), $filename);
+        $file_path = $filename;
     }
+
+    $tugas = TugasPerkuliahan::create([
+        'id_materi' => $request->id_materi,
+        'judul_tugas' => $request->judul_tugas,
+        'deskripsi_tugas' => $request->deskripsi_tugas,
+        'deadline' => $request->deadline,
+        'file_tugas' => $file_path,
+    ]);
+
+    $materi = MateriPerkuliahan::find($tugas->id_materi);
+    return redirect()->route('dosen.kelas.detail', $materi?->id_kelas)->with('success', 'Tugas berhasil ditambahkan');
+}
 
     public function editTugas($id_tugas)
     {

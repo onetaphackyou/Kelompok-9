@@ -10,6 +10,7 @@
 </div>
 
 <div class="card p-3">
+    <div style="overflow-x: auto;">
     <table class="table table-hover mb-0">
         <thead>
             <tr>
@@ -42,5 +43,6 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 </div>
 @endsection

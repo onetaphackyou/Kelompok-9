@@ -147,14 +147,14 @@ public function pengumpulan($id_tugas, $id_kelas)
 {
     $id_dosen = Auth::user()->dosen->id_dosen;
 
-    // Verifikasi kepemilikan kelas dan tugas
-    $tugas = \App\Models\TugasPerkuliahan::whereHas('materi.kelas', function($q) use ($id_dosen, $id_kelas) {
-                $q->where('id_kelas', $id_kelas)->where('id_dosen', $id_dosen);
+    $tugas = \App\Models\TugasPerkuliahan::whereHas('materi', function($q) use ($id_kelas) {
+                $q->where('id_kelas', $id_kelas);
               })->findOrFail($id_tugas);
 
+    // Verifikasi manual kepemilikan kelas
     $kelas = $tugas->materi->kelas;
+    if ($kelas->id_dosen != $id_dosen) abort(403);
 
-    // Ambil semua peserta kelas
     $pengumpulan = \App\Models\PesertaKelasPerkuliahan::with('mahasiswa')
                     ->where('id_kelas', $id_kelas)
                     ->get()
