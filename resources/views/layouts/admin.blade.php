@@ -6,7 +6,7 @@
     <title>@yield('title') | {{ ucfirst(Auth::user()->role) }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="/css/style.css">
     @stack('styles')
 </head>
 <body class="{{ Auth::user()->role }}">
@@ -120,7 +120,7 @@ $dosen = $user->id ? \App\Models\Dosen::where('id_user', $user->id)->first() : n
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="/js/custom.js"></script>
     @stack('scripts')
 </body>
 </html>

@@ -1,12 +1,11 @@
 <div class="sidebar" id="sidebar">
     @if(auth()->check())
       <div class="sidebar-header">
-        <div>
+    <div>
         <small style="font-size: 0.7rem; opacity: 0.8; display: block;">Learning Management System</small>
-        <h3 style="margin: 0;">{{ ucfirst(auth()->user()->role) }}</h3>
-     </div>
-        <button class="close-btn">&times;</button>
-     </div>
+    </div>
+    <button class="close-btn">&times;</button>
+    </div>
 
         <div class="sidebar-content">
             <!-- DASHBOARD -->
