@@ -12,7 +12,7 @@
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
-                    <tr><th>NIM</th><th>Nama Mahasiswa</th><th>Status</th><th>File</th><th>Nilai</th><th>Aksi</th></tr>
+                    <tr><th>NIM</th><th>Nama Mahasiswa</th><th>Status</th><th>File Jawaban</th><th>Nilai</th><th>Aksi</th></tr>
                 </thead>
                 <tbody>
                     @forelse($pengumpulan as $peserta)
@@ -20,12 +20,15 @@
                     <tr>
                         <td>{{ $peserta->mahasiswa->nim }}</td>
                         <td>{{ $peserta->mahasiswa->nama }}</td>
-                        <td><span class="badge {{ $p && $p->status == 'diserahkan' ? 'bg-success' : 'bg-warning' }}">
-                            {{ $p && $p->status == 'diserahkan' ? 'Sudah Dikumpulkan' : 'Belum Dikumpulkan' }}
-                        </span></td>
+                        <td>
+                            <span class="badge {{ $p && $p->status == 'diserahkan' ? 'bg-success' : 'bg-warning' }}">
+                                {{ $p && $p->status == 'diserahkan' ? 'Sudah Dikumpulkan' : 'Belum Dikumpulkan' }}
+                            </span>
+                        </td>
                         <td>
                             @if($p && $p->upload_file)
-                                <a href="{{ Storage::url($p->upload_file) }}" download class="btn btn-sm btn-primary">Download</a>
+                                {{-- File jawaban mahasiswa ada di storage/app/public/tugas_mahasiswa --}}
+                                <a href="{{ route('download.tugas', basename($p->upload_file)) }}" class="btn btn-sm btn-primary">Download</a>
                             @else
                                 -
                             @endif
