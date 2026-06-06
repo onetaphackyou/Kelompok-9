@@ -1,20 +1,20 @@
 <div class="sidebar" id="sidebar">
     @if(auth()->check())
         <div class="sidebar-header">
-    <div>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-            <div style="background: rgba(255,255,255,0.2); border-radius: 8px; padding: 6px 8px;">
-                <i class="fas fa-graduation-cap" style="font-size: 1.2rem;"></i>
-            </div>
             <div>
-                <div style="font-size: 0.65rem; opacity: 0.75; letter-spacing: 1px; text-transform: uppercase;">Portal</div>
-                <div style="font-size: 0.95rem; font-weight: 700; line-height: 1.2;">Learning Management</div>
-                <div style="font-size: 0.95rem; font-weight: 700; line-height: 1.2;">System</div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                    <div style="background: rgba(255,255,255,0.2); border-radius: 8px; padding: 6px 8px;">
+                        <i class="fas fa-graduation-cap" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.65rem; opacity: 0.75; letter-spacing: 1px; text-transform: uppercase;">Portal</div>
+                        <div style="font-size: 0.95rem; font-weight: 700; line-height: 1.2;">Learning Management</div>
+                        <div style="font-size: 0.95rem; font-weight: 700; line-height: 1.2;">System</div>
+                    </div>
+                </div>
             </div>
-   </div>
-     </div>
-    <button class="close-btn">&times;</button>
-         </div>
+            <button class="close-btn">&times;</button>
+        </div>
 
         <div class="sidebar-content">
 
@@ -60,12 +60,6 @@
                     <a href="{{ route('admin_prodi.peserta') }}" class="@yield('active_peserta')">
                         <i class="fas fa-users"></i> Peserta
                     </a>
-                    <a href="{{ route('admin_prodi.materi') }}" class="@yield('active_materi')">
-                        <i class="fas fa-file-alt"></i> Materi
-                    </a>
-                    <a href="{{ route('admin_prodi.tugas') }}" class="@yield('active_tugas')">
-                        <i class="fas fa-tasks"></i> Tugas
-                    </a>
                     <a href="{{ route('admin_prodi.jadwal') }}" class="@yield('active_jadwal')">
                         <i class="fas fa-calendar-alt"></i> Jadwal
                     </a>
@@ -85,6 +79,9 @@
                     <a href="{{ route('dosen.tugas.page') }}" class="@yield('active_tugas')">
                         <i class="fas fa-tasks"></i> Tugas
                     </a>
+                    <a href="{{ route('dosen.pengumuman.index') }}" class="@yield('active_pengumuman')">
+                        <i class="fas fa-bullhorn"></i> Pengumuman
+                    </a>
                     <a href="{{ route('dosen.jadwal') }}" class="@yield('active_jadwal')">
                         <i class="fas fa-calendar-alt"></i> Jadwal
                     </a>
@@ -96,7 +93,7 @@
                         <i class="fas fa-tachometer-alt"></i> Dashboard
                     </a>
                     <a href="{{ route('mahasiswa.kelas') }}" class="@yield('active_kelas')">
-                        <i class="fas fa-school"></i> Perkuliahan Saya
+                        <i class="fas fa-school"></i> Perkuliahan
                     </a>
                     <a href="{{ route('mahasiswa.materi') }}" class="@yield('active_materi')">
                         <i class="fas fa-file-alt"></i> Materi

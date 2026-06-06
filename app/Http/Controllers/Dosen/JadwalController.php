@@ -25,19 +25,29 @@ class JadwalController extends Controller
         return view('dosen.jadwal', compact('jadwal_list', 'kelas_list'));
     }
 
-    public function update(Request $request, $id_jadwal)
+    public function requestUpdate(Request $request, $id_jadwal)
     {
         $request->validate([
-            'hari' => 'required',
-            'jam_mulai' => 'required',
-            'jam_selesai' => 'required',
-            'ruangan' => 'required',
-            'keterangan' => 'nullable',
+            'hari_request' => 'required',
+            'jam_mulai_request' => 'required',
+            'jam_selesai_request' => 'required',
+            'ruangan_request' => 'required',
+            'keterangan_request' => 'nullable',
         ]);
 
         $jadwal = Jadwal::findOrFail($id_jadwal);
-        $jadwal->update($request->only(['hari', 'jam_mulai', 'jam_selesai', 'ruangan', 'keterangan']));
+        $id_dosen = Auth::user()->dosen->id_dosen;
 
-        return redirect()->route('dosen.jadwal')->with('success', 'Jadwal berhasil diperbarui!');
+        $jadwal->update([
+            'hari_request' => $request->hari_request,
+            'jam_mulai_request' => $request->jam_mulai_request,
+            'jam_selesai_request' => $request->jam_selesai_request,
+            'ruangan_request' => $request->ruangan_request,
+            'keterangan_request' => $request->keterangan_request,
+            'status_request' => 'pending',
+            'id_dosen_request' => $id_dosen,
+        ]);
+
+        return redirect()->route('dosen.jadwal')->with('success', 'Request perubahan jadwal berhasil dikirim, menunggu persetujuan Admin Prodi!');
     }
 }

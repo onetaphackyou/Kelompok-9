@@ -122,6 +122,9 @@ Route::middleware(['auth', 'role:admin_prodi'])
         Route::get('/jadwal', [\App\Http\Controllers\AdminProdi\JadwalController::class, 'index'])->name('jadwal');
         Route::post('/jadwal', [\App\Http\Controllers\AdminProdi\JadwalController::class, 'store'])->name('jadwal.store');
         Route::delete('/jadwal/{id_jadwal}', [\App\Http\Controllers\AdminProdi\JadwalController::class, 'destroy'])->name('jadwal.hapus');
+    
+        Route::post('/jadwal/{id_jadwal}/approve', [\App\Http\Controllers\AdminProdi\JadwalController::class, 'approve'])->name('jadwal.approve');
+        Route::post('/jadwal/{id_jadwal}/reject', [\App\Http\Controllers\AdminProdi\JadwalController::class, 'reject'])->name('jadwal.reject');
     });
 
 // ==============================================
@@ -166,6 +169,7 @@ Route::middleware(['auth', 'role:dosen'])
         Route::get('/pengumuman/{id_kelas}', [\App\Http\Controllers\Dosen\PengumumanController::class, 'index'])->name('pengumuman');
         Route::post('/pengumuman', [\App\Http\Controllers\Dosen\PengumumanController::class, 'store'])->name('pengumuman.store');
         Route::delete('/pengumuman/{id_pengumuman}', [\App\Http\Controllers\Dosen\PengumumanController::class, 'destroy'])->name('pengumuman.hapus');
+        Route::get('/pengumuman-all', [\App\Http\Controllers\Dosen\PengumumanAllController::class, 'index'])->name('pengumuman.index');
 
         // Materi & Tugas Page
         Route::get('/materi-page', [\App\Http\Controllers\Dosen\MateriPageController::class, 'index'])->name('materi.page');
@@ -177,8 +181,11 @@ Route::middleware(['auth', 'role:dosen'])
 
         // Jadwal Dosen (lihat & edit)
         Route::get('/jadwal', [\App\Http\Controllers\Dosen\JadwalController::class, 'index'])->name('jadwal');
-        Route::put('/jadwal/{id_jadwal}', [\App\Http\Controllers\Dosen\JadwalController::class, 'update'])->name('jadwal.update');
+        Route::post('/jadwal/{id_jadwal}/request', [\App\Http\Controllers\Dosen\JadwalController::class, 'requestUpdate'])->name('jadwal.request');
 
+        Route::get('/pengumuman-all', [\App\Http\Controllers\Dosen\PengumumanAllController::class, 'index'])->name('pengumuman.index');
+        Route::post('/pengumuman-all', [\App\Http\Controllers\Dosen\PengumumanAllController::class, 'store'])->name('pengumuman.index.store');
+        Route::delete('/pengumuman-all/{id_pengumuman}', [\App\Http\Controllers\Dosen\PengumumanAllController::class, 'destroy'])->name('pengumuman.index.hapus');
     });
 
 // ==============================================
