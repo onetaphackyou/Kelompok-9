@@ -1434,11 +1434,11 @@ table tbody td {
     background: rgba(255,255,255,0.15);
 }
 
-..hamburger-line {
-    width: 22px;
-    height: 2px;
+.hamburger-line {
+    width: 25px;
+    height: 3px;
     background-color: white;
-    margin: 4px 0;
+    margin: 3px 0;
     transition: 0.3s;
     border-radius: 2px;
     display: block;
