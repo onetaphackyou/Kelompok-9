@@ -227,6 +227,23 @@
         }
     </style>
 </head>
+
+<script>
+function togglePassword() {
+    const input = document.getElementById('password');
+    const icon = document.getElementById('toggleIcon');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+    }
+}
+</script>
+
 <body>
     <div class="login-wrapper">
         <div class="login-card row g-0 overflow-hidden">
@@ -265,12 +282,15 @@
                     </div>
                     <div class="mb-4 input-group-icon">
                         <label for="password" class="form-label">Kata Sandi</label>
-                        <i class="bi bi-lock-fill input-icon"></i>
-                        <input id="password" type="password" name="password" class="form-control form-control-lg @error('password') is-invalid @enderror" required placeholder="Masukkan kata sandi">
-                        @error('password')
-                            <div class="form-error">{{ $message }}</div>
-                        @enderror
-                    </div>
+                            <i class="bi bi-lock-fill input-icon"></i>
+                         <input id="password" type="password" name="password" class="form-control form-control-lg @error('password') is-invalid @enderror" required placeholder="Masukkan kata sandi" style="padding-right: 3.2rem;">
+                         <button type="button" onclick="togglePassword()" style="position:absolute; right:1rem; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(148,163,184,0.9); cursor:pointer; font-size:1.05rem;">
+                             <i class="bi bi-eye" id="toggleIcon"></i>
+                        </button>
+     @error('password')
+        <div class="form-error">{{ $message }}</div>
+    @enderror
+</div>
 
                     <button type="submit" class="btn btn-primary btn-lg mb-3">
                         <i class="bi bi-box-arrow-in-right me-2"></i> Masuk ke LMS
